@@ -57,7 +57,7 @@ void Player::Update()
 	}
 	
 	//重力落下
-	//m_vec.y -= GRAVITY;
+	m_vec.y -= GRAVITY;
 	m_pos += m_vec;
 
 	//アニメーション更新
@@ -80,7 +80,37 @@ void Player::Collision(Base* b)
 		{
 			//押し戻し量
 			CVector3D v(0, 0, 0);
-			//
+			//カプセルとモデルの衝突
+			auto tri = b->GetModel()->CollisionCapsule(
+				CCapsule(m_pos + CVector3D(0, 2.0 - m_rad, 0),	//始点（頭）
+				m_pos + CVector3D(0, m_rad, 0),					//終点（足元）
+				m_rad));
+			//接触した面の数繰り返す
+			for (auto& t : tri) {
+				if (t.m_normal.y < -0.5f) {
+					//面が下向き→天井に当たった
+					//上昇速度を0に戻す
+					if (m_vec.y > 0)
+						m_vec.y = 0;
+				}
+				else if (t.m_normal.y > 0.8f) {
+					//面が上向き→地面に当たった
+					//重力落下速度を0に戻す
+					if (m_vec.y < 0)
+						m_vec.y = 0;
+				}
+				//接触した面の方向へ、めり込んだ分押し戻す
+				CVector3D nv = t.m_normal * (m_rad - t.m_dist);
+				//最も大きな移動量を求める
+				v.y = fabs(v.y) > fabs(nv.y) ? v.y : nv.y;
+				if (t.m_normal.y < 0.8f) {
+					v.x = fabs(v.x) > fabs(nv.x) ? v.x : nv.x;
+					v.z = fabs(v.z) > fabs(nv.z) ? v.z : nv.z;
+				}
+			}
+			//押し戻す
+			m_pos += v;
 		}
+		break;
 	}
 }

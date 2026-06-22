@@ -6,7 +6,7 @@ private:
 	//モデルオブジェクト定義
 
 	//ステージのモデル
-	CModelField* mp_model;
+	CModelObj* mp_model;
 
 public:
 	Stage();

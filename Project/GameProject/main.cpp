@@ -109,7 +109,7 @@ void Init(void)
 	//モデルの読み込み
 	
 	ADD_RESOURCE("Boy", CModel::CreateModel("Charactor/Boy/boy.a3m"));
-	ADD_RESOURCE("Stage", CModel::CreateModel("Field/Land/Land.field", 2, 1, 2));
+	ADD_RESOURCE("Stage", CModel::CreateModel("Field/Cube/Cube.obj", 2, 1, 2));
 	ADD_RESOURCE("Sky", CModel::CreateModel("Field/Sky/Sky.obj"));
 
 	//■影描画機能を生成	描画範囲	光源の高さ 解像度
