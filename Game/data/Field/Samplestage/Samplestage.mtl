@@ -1,0 +1,279 @@
+# Blender 5.1.1 MTL File: 'Samplestage.blend'
+# www.blender.org
+
+newmtl Glass
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/Glass_01.png
+map_d textures/Glass_01.png
+
+newmtl Glow_Low
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/Glow.png
+map_d textures/Glow.png
+
+newmtl Glow_Strong
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/Glow.png
+map_d textures/Glow.png
+
+newmtl HD_Alpha_01_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Alpha_01_Dif_Style_01.png
+map_d textures/HD_Alpha_01_Dif_Style_01.png
+
+newmtl HD_Alpha_01_Norm_Transp
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Alpha_01_Dif_Style_01.png
+map_d textures/HD_Alpha_01_Dif_Style_01.png
+
+newmtl HD_Alpha_02_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Alpha_02_Dif_Style_02_Alb.png
+map_d textures/HD_Alpha_02_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Alpha_02_Dif_Style_02_Norm.png
+
+newmtl HD_Floor_01_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Floor_01_Dif_Style_02_Alb.png
+map_d textures/HD_Floor_01_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Floor_01_Dif_Style_02_Norm.png
+
+newmtl HD_Floor_02_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Floor_02_Dif_Style_02_Alb.png
+map_d textures/HD_Floor_02_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Floor_02_Dif_Style_02_Norm.png
+
+newmtl HD_Stuff_01_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Stuff_01_Dif_Style_02_Alb.png
+map_Ke textures/HD_Stuff_01_Dif_Style_02_Illum.png
+map_d textures/HD_Stuff_01_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Stuff_01_Dif_Style_02_Norm.png
+
+newmtl HD_Stuff_02_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Stuff_02_Dif_Style_02_Alb.png
+map_Ke textures/HD_Stuff_02_Dif_Style_02_Illum.png
+map_d textures/HD_Stuff_02_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Stuff_02_Dif_Style_02_Norm.png
+
+newmtl HD_Stuff_03_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Stuff_03_Dif_Style_02_Alb.png
+map_Ke textures/HD_Stuff_03_Dif_Style_02_Illum.png
+map_d textures/HD_Stuff_03_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Stuff_03_Dif_Style_02_Norm.png
+
+newmtl HD_Stuff_04_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Stuff_04_Dif_Style_02_Alb.png
+map_Ke textures/HD_Stuff_04_Dif_Style_02_Illum.png
+map_d textures/HD_Stuff_04_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Stuff_04_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_01_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_01_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_01_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_01_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_01_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_02_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_02_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_02_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_02_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_02_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_03_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_03_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_03_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_03_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_03_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_04_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_04_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_04_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_04_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_04_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_05_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_05_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_05_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_05_Dif_Style_02_Alb.png
+
+newmtl HD_Wall_06_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_06_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_06_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_06_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_06_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_08_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_08_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_08_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_08_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_08_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_09_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_09_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_09_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_09_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_09_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_10_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_10_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_10_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_10_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_10_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_11_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_11_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_11_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_11_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_11_Dif_Style_02_Norm.png
+
+newmtl HD_Wall_12_Norm
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.500000
+illum 2
+map_Kd textures/HD_Wall_12_Dif_Style_02_Alb.png
+map_Ke textures/HD_Wall_12_Dif_Style_02_Illum.png
+map_d textures/HD_Wall_12_Dif_Style_02_Alb.png
+map_Bump -bm 1.000000 textures/HD_Wall_12_Dif_Style_02_Norm.png
+
+newmtl HUD_Screen_01
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/HUD_Screen_01.png
+map_d textures/HUD_Screen_01.png
+
+newmtl HUD_Screen_02
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/HUD_Screen_02.png
+map_d textures/HUD_Screen_02.png
+
+newmtl Sun
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd textures/Sun.png
+map_d textures/Sun.png
