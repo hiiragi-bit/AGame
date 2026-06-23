@@ -3,6 +3,7 @@
 Stage::Stage()
 	:Base(eField)
 {
+	//ƒ‚ƒfƒ‹‚Ìæ“¾
 	mp_model = GET_RESOURCE("Stage", CModelObj);
 	//ˆÊ’uİ’è
 	m_pos = CVector3D(0, 0, 0);
