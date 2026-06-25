@@ -81,4 +81,5 @@ void Enemy::Collision(Base* b)
 
 void Enemy::TakeDamage(const CVector3D& vec)
 {
+	SetKill();
 }

@@ -1,5 +1,6 @@
 #include "Base/Base.h"
 #include "Game/Player.h"
+#include "Game/Enemy.h"
 #include "Game/TPSCamera.h"
 #include "Game/Stage.h"
 //--------------------------------------------
@@ -109,6 +110,8 @@ void Init(void)
 	//ÉÇÉfÉãÇÃì«Ç›çûÇ›
 	
 	ADD_RESOURCE("Boy", CModel::CreateModel("Charactor/Boy/boy.a3m"));
+	ADD_RESOURCE("Sword", CModel::CreateModel("Wepon/Sword/Sword.obj"));
+	ADD_RESOURCE("Golem", CModel::CreateModel("Charactor/Golem/golem.a3m"));
 	ADD_RESOURCE("Stage", CModel::CreateModel("Field/Cube/Cube.obj", 2, 1, 2));
 	ADD_RESOURCE("Sky", CModel::CreateModel("Field/Sky/Sky.obj"));
 
@@ -119,6 +122,7 @@ void Init(void)
 	//ÉQÅ[ÉÄÇ…èoåªÇ≥ÇπÇÈ
 
 	Base::Add(new Player(CVector3D(0, 0, 0)));
+	Base::Add(new Enemy(CVector3D(0, 0, -5)));
 	Base::Add(new TPSCamera);
 	Base::Add(new Stage());
 	Base::Add(new SkyBox());

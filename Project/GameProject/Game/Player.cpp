@@ -3,8 +3,10 @@
 Player::Player(const CVector3D& pos)
 	:Base(ePlayer)
 {
-	//モデルの複製
+	//プレイヤーモデルの複製
 	m_model = COPY_RESOURCE("Boy", CModelA3M);
+	//剣モデルの複製
+	m_sword_model = COPY_RESOURCE("Sword", CModelObj);
 	//アニメ調にする
 	m_model.SetToon(true);
 	//プレイヤーの座標
@@ -70,6 +72,26 @@ void Player::Render()
 	m_model.SetRot(m_rot);
 	m_model.SetScale(1.0f, 1.0f, 1.0f);
 	m_model.Render();
+
+	//■剣の描画
+	//右手のボーン
+	const int hand_idx = 64;
+	//武器のワールド行列=ボーンの行列
+	//×武器のローカル行列（平行移動×回転×スケール）
+	m_sword_matrix = m_model.GetFrameMatrix(hand_idx)
+		* CMatrix::MTranselate(-0.2, 0.5, -0.05)
+		* CMatrix::MRotationX(DtoR(90))
+		* CMatrix::MRotationY(DtoR(-80))
+		* CMatrix::MRotationZ(DtoR(0))
+		* CMatrix::MScale(0.005f, 0.005f, 0.005f);
+	//武器の描画
+	m_sword_model.Render(m_sword_matrix);
+	//剣のカプセル描画
+	CVector3D sword_s, sword_e;
+	float sword_rad = 0.1f;
+	sword_s = m_sword_matrix * CVector4D(0, 0, 20, 1);
+	sword_e = m_sword_matrix * CVector4D(0, 0, 150, 1);
+	Utility::DrawCapsule(sword_s, sword_e, sword_rad, CVector4D(1, 0, 0, 0.5));
 }
 
 void Player::Collision(Base* b)
