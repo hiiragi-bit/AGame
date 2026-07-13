@@ -23,9 +23,9 @@
     <ClInclude Include="Effekseer\EffekseerEffect.h" />
     <ClInclude Include="Effekseer\EffekseerManager.h" />
     <ClInclude Include="Game\Enemy.h" />
+    <ClInclude Include="Game\IDamage.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\Stage.h" />
-    <ClInclude Include="Game\SwordAttack.h" />
     <ClInclude Include="Game\TPSCamera.h" />
     <ClInclude Include="Global.h" />
   </ItemGroup>
@@ -36,7 +36,6 @@
     <ClCompile Include="Game\Enemy.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\Stage.cpp" />
-    <ClCompile Include="Game\SwordAttack.cpp" />
     <ClCompile Include="Game\TPSCamera.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
