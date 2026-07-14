@@ -112,7 +112,7 @@ void Init(void)
 
 	//ÉÇÉfÉãÇÃì«Ç›çûÇ›
 	
-	ADD_RESOURCE("Boy", CModel::CreateModel("Charactor/Boy/boy.a3m"));
+	ADD_RESOURCE("Boy", CModel::CreateModel("Charactor/Boy/Aboy.a3m"));
 	ADD_RESOURCE("Sword", CModel::CreateModel("Wepon/Sword/Sword.obj"));
 	ADD_RESOURCE("Golem", CModel::CreateModel("Charactor/Golem/golem.a3m"));
 	ADD_RESOURCE("Stage", CModel::CreateModel("Field/Cube/Cube.obj", 2, 1, 2));

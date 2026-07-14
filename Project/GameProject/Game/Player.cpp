@@ -13,9 +13,15 @@ Player::Player(const CVector3D& pos)
 	m_pos = pos;
 	//当たり判定用球の半径
 	m_rad = 0.3f;
+	m_state = eState_Idle;
+	m_height = 2.0f;
+	m_attack_flag = false;
+	//接地フラグ
+	m_is_ground = true;
+	m_state_step = 0;
 }
 
-void Player::Update()
+void Player::StateIdle()
 {
 	float cam_ang = 0;
 	if (Base* b = Base::FindObject(eCamera)) {
@@ -27,6 +33,11 @@ void Player::Update()
 
 	//キャラクターの移動量
 	const float move_speed = 0.1f;
+
+	if (m_is_ground && PUSH(CInput::eButton5)) {
+		m_vec.y = 0.2;
+		m_is_ground = false;
+	}
 
 	//方向キーのベクトル
 	CVector3D key_dir(0, 0, 0);
@@ -52,15 +63,66 @@ void Player::Update()
 		CVector3D dir = CMatrix::MRotationY(m_rot.y) * key_dir;
 		//移動
 		m_pos += dir * move_speed;
-		m_model.ChangeAnimation(1);
+		//ジャンプ中なら
+		/*if (!m_is_ground) {
+
+		}*/
+		//走るアニメーション
+		m_model.ChangeAnimation(eAnim_Run);
 	}
 	else {
-		m_model.ChangeAnimation(0);
+		//待機アニメーション
+		m_model.ChangeAnimation(eAnim_Idle);
 	}
+
+	//マウス左クリックで攻撃状態へ
+	if (PUSH(CInput::eMouseL)) {
+		m_state = eState_Attack;
+	}
+}
+
+void Player::StateAttack()
+{
+	m_model.ChangeAnimation(eAnim_Attack1, false);
+	switch (m_state_step) {
+	case 0:
+		if (m_model.GetAnimationFrame() > 15) {
+			m_attack_flag = true;
+			m_state_step++;
+		}
+		break;
+	case 1:
+		if (m_model.GetAnimationFrame() > 18) {
+			m_attack_flag = false;
+			m_state_step++;
+		}
+		break;
+	}
+	if (m_model.isAnimationEnd()) {
+		m_state_step = 0;
+		m_state = eState_Idle;
+	}
+}
+
+void Player::Update()
+{
+	switch (m_state) {
+	case eState_Idle:
+		StateIdle();
+		break;
+	case eState_Attack:
+		StateAttack();
+		break;
+	}	
 	
 	//重力落下
 	m_vec.y -= GRAVITY;
 	m_pos += m_vec;
+
+	//カプセルを設定
+	m_capusle = CCapsule(m_pos + CVector3D(0, m_height - m_rad, 0),	//始点（頭）
+		m_pos + CVector3D(0, m_rad, 0),								//終点（足元）
+		m_rad);
 
 	//アニメーション更新
 	m_model.UpdateAnimation();
@@ -70,7 +132,7 @@ void Player::Render()
 {
 	m_model.SetPos(m_pos);
 	m_model.SetRot(m_rot);
-	m_model.SetScale(1.0f, 1.0f, 1.0f);
+	m_model.SetScale(0.01f, 0.01f, 0.01f);
 	m_model.Render();
 
 	//■剣の描画
@@ -88,25 +150,47 @@ void Player::Render()
 	m_sword_model.Render(m_sword_matrix);
 	//剣のカプセル描画
 	CVector3D sword_s, sword_e;
-	float sword_rad = 0.1f;
+	float sword_rad = 0.45f;
 	sword_s = m_sword_matrix * CVector4D(0, 0, 20, 1);
 	sword_e = m_sword_matrix * CVector4D(0, 0, 150, 1);
 	Utility::DrawCapsule(sword_s, sword_e, sword_rad, CVector4D(1, 0, 0, 0.5));
+	m_attack_cap = CCapsule(sword_s, sword_e, sword_rad);
 }
 
 void Player::Collision(Base* b)
 {
 	switch (b->GetType()) {
+		//敵との判定
+		case eEnemy:
+		{
+			CVector3D c1, d1;
+			float dist;
+			//カプセル同士の判定
+			if (CCollision::CollisionCapsule(m_capusle, b->m_capusle, &dist, &c1, &d1)) {
+				//押し戻す
+				float s = (m_capusle.GetRadius() + b->m_capusle.GetRadius()) - dist;
+				b->m_pos += d1 * s * 0.5f;
+				m_pos -= d1 * s * 0.5f;
+			}
+			//攻撃との判定
+			if (m_attack_flag &&
+				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
+				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->TakeDamage(CVector3D(0, 0, 0));
+					//多重ヒット防止
+					m_attack_flag = false;
+				}
+			}
+		}
+		break;
+		//ステージとの判定
 		case eField:
 		//モデルとの判定(球)(カプセル)
 		{
 			//押し戻し量
 			CVector3D v(0, 0, 0);
 			//カプセルとモデルの衝突
-			auto tri = b->GetModel()->CollisionCapsule(
-				CCapsule(m_pos + CVector3D(0, 2.0 - m_rad, 0),	//始点（頭）
-				m_pos + CVector3D(0, m_rad, 0),					//終点（足元）
-				m_rad));
+			auto tri = b->GetModel()->CollisionCapsule(m_capusle);
 			//接触した面の数繰り返す
 			for (auto& t : tri) {
 				if (t.m_normal.y < -0.5f) {
@@ -120,6 +204,7 @@ void Player::Collision(Base* b)
 					//重力落下速度を0に戻す
 					if (m_vec.y < 0)
 						m_vec.y = 0;
+						m_is_ground = true;
 				}
 				//接触した面の方向へ、めり込んだ分押し戻す
 				CVector3D nv = t.m_normal * (m_rad - t.m_dist);
@@ -135,4 +220,8 @@ void Player::Collision(Base* b)
 		}
 		break;
 	}
+}
+
+void Player::TakeDamage(const CVector3D& vec)
+{
 }
