@@ -183,7 +183,7 @@ public:
 	/*
 	•`‰æ
 	*/
-	void Draw(std::vector<CMaterial*>& materialList, CMatrix* send_matrix, CMatrix* bone_matrix_base, int bone_size, const CMatrix& mv, const CMatrix& m, const CMatrix& lm, float shadow, bool toon);
+	void Draw(std::vector<CMaterial*>& materialList, CMatrix* send_matrix, CMatrix* bone_matrix_base, int bone_size, const CMatrix& v, const CMatrix& m, const CMatrix& lm, float shadow, bool toon);
 	void CreateCollisionIndex(const CA3MColl* c);
 
 	bool CollisionRay(CVector3D* c, CVector3D* n, const CVector3D& s, const CVector3D& e, float* pLength, const CMatrix& matrix);

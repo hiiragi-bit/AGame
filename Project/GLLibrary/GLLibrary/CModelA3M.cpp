@@ -736,7 +736,7 @@ void CA3MMesh::Release()
 }
 
 
-void CA3MMesh::Draw(std::vector<CMaterial*>& materialList, CMatrix* send_matrix, CMatrix* bone_matrix, int bone_size, const CMatrix& mv, const CMatrix& m, const CMatrix& lm, float shadow, bool toon) 
+void CA3MMesh::Draw(std::vector<CMaterial*>& materialList, CMatrix* send_matrix, CMatrix* bone_matrix, int bone_size, const CMatrix& v, const CMatrix& m, const CMatrix& lm, float shadow, bool toon) 
 {
 
 	if (send_matrix) {
@@ -759,7 +759,8 @@ void CA3MMesh::Draw(std::vector<CMaterial*>& materialList, CMatrix* send_matrix,
 		//if (m_vertex_type == A3M::eSkinMesh) {
 //} else {
 		glUniformMatrix4fv(glGetUniformLocation(mat->mp_shader->GetProgram(), "LocalMatrix"), 1, GL_FALSE, lm.f);
-		glUniformMatrix4fv(glGetUniformLocation(mat->mp_shader->GetProgram(), "ModelViewMatrix"), 1, GL_FALSE, mv.f);
+		glUniformMatrix4fv(glGetUniformLocation(mat->mp_shader->GetProgram(), "ModelViewMatrix"), 1, GL_FALSE, (v*m).f);
+		glUniformMatrix4fv(glGetUniformLocation(mat->mp_shader->GetProgram(), "ViewMatrix"), 1, GL_FALSE, v.f);
 		glUniformMatrix4fv(glGetUniformLocation(mat->mp_shader->GetProgram(), "WorldMatrix"), 1, false, m.f);
 		//}
 
@@ -979,7 +980,7 @@ void CModelA3M::DrawMesh(CA3MNode* node,const CMatrix&view_matrix)
 	//CMatrix world_matrix = parent_matrix*node->m_local_matrix;
 	if (node->mp_mesh && node->m_visibility) {
 		CA3MMesh* m = node->mp_mesh;
-		m->Draw(m_material_list, m_send_matrix, m_bone_matrix, m_bone_num, (view_matrix * m_matrix), m_matrix, node->m_matrix, m_shadow_bias, m_toon);
+		m->Draw(m_material_list, m_send_matrix, m_bone_matrix, m_bone_num, view_matrix, m_matrix, node->m_matrix, m_shadow_bias, m_toon);
 	}
 	if (node->mp_child) DrawMesh(node->mp_child,view_matrix);
 	if (node->mp_next) DrawMesh(node->mp_next,view_matrix);
@@ -1188,7 +1189,7 @@ CModelA3M::CModelA3M()
 	,m_animation_size(0), m_col_cut(nullptr)
 	, m_enable_animation(false)
 {
-	m_shadow_bias = 0.0001f;
+	m_shadow_bias = 0.0005f;
 }
 
 CModelA3M::~CModelA3M()
