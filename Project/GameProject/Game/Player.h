@@ -8,7 +8,8 @@ private:
 	enum {
 		eAnim_Idle,
 		eAnim_Run,
-		eAnim_Attack1,
+		eAnim_AttackCombo1,
+		eAnim_AttackCombo2,
 	};
 
 	//状態
@@ -41,6 +42,8 @@ private:
 	CCapsule m_attack_cap;	//剣のカプセル
 	bool m_is_ground;		//接地フラグ
 	int m_state_step;		//各状態での工程
+	int m_upper_body;		//腰のボーン
+	void Move();
 
 public:
 	Player(const CVector3D& pos);

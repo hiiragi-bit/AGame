@@ -34,7 +34,7 @@ void Enemy::StateIdle()
 	//キャラクターの移動量
 	const float move_speed = 0.05f;
 	m_attack_time++;
-	m_move_cnt++;
+	//m_move_cnt++;
 	//ターゲットへのベクトル
 	CVector3D vec;
 	if (Base* p = Base::FindObject(ePlayer)) {
