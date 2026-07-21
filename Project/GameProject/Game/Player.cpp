@@ -19,9 +19,17 @@ Player::Player(const CVector3D& pos)
 	//接地フラグ
 	m_is_ground = true;
 	m_state_step = 0;
+
+	//腰のボーン
+	m_upper_body = 4;
+	//上半身終わり
+	const int upper_body_end = 81;
+	for (int i = m_upper_body; i <= upper_body_end; i++) {
+		m_model.GetNode(i)->SetAnimationLayer(1);
+	}
 }
 
-void Player::StateIdle()
+void Player::Move()
 {
 	float cam_ang = 0;
 	if (Base* b = Base::FindObject(eCamera)) {
@@ -29,6 +37,7 @@ void Player::StateIdle()
 		cam_ang = b->m_rot.y;
 		//キャラクターの回転値をカメラの回転値に合わせる
 		m_rot.y = b->m_rot.y;
+		//m_rot.x = b->m_rot.x;
 	}
 
 	//キャラクターの移動量
@@ -68,12 +77,18 @@ void Player::StateIdle()
 
 		}*/
 		//走るアニメーション
-		m_model.ChangeAnimation(eAnim_Run);
+		m_model.ChangeAnimation(0, eAnim_Run);
 	}
 	else {
 		//待機アニメーション
-		m_model.ChangeAnimation(eAnim_Idle);
+		m_model.ChangeAnimation(0, eAnim_Idle);
 	}
+}
+
+void Player::StateIdle()
+{
+	Move();
+	m_model.ChangeAnimation(1, m_model.GetAnimationJam(0));
 
 	//マウス左クリックで攻撃状態へ
 	if (PUSH(CInput::eMouseL)) {
@@ -83,24 +98,39 @@ void Player::StateIdle()
 
 void Player::StateAttack()
 {
-	m_model.ChangeAnimation(eAnim_Attack1, false);
+	Move();
+	m_model.ChangeAnimation(1, eAnim_AttackCombo1, false);
 	switch (m_state_step) {
 	case 0:
-		if (m_model.GetAnimationFrame() > 15) {
+		if (m_model.GetAnimationFrame(1) > 15) {
 			m_attack_flag = true;
 			m_state_step++;
 		}
 		break;
 	case 1:
-		if (m_model.GetAnimationFrame() > 18) {
+		if (m_model.GetAnimationFrame(1) > 18) {
 			m_attack_flag = false;
 			m_state_step++;
 		}
 		break;
-	}
-	if (m_model.isAnimationEnd()) {
-		m_state_step = 0;
-		m_state = eState_Idle;
+	case 2:
+		if (25 < m_model.GetAnimationFrame(1) > 18) {
+			if (PUSH(CInput::eMouseL)) {
+				m_model.ChangeAnimation(1, eAnim_AttackCombo2, false);
+				m_attack_flag = true;
+				m_state_step++;
+			}
+		}
+		else if (m_model.GetAnimationFrame(1) > 26) {
+			m_state_step = 4;
+		}
+		break;
+	case 4:
+		if (m_model.isAnimationEnd(1)) {
+			m_state_step = 0;
+			m_state = eState_Idle;
+		}
+		break;
 	}
 }
 
@@ -130,20 +160,21 @@ void Player::Update()
 
 void Player::Render()
 {
+	m_model.BindFrameMatrix(m_upper_body, CMatrix::MRotation(m_rot));
 	m_model.SetPos(m_pos);
-	m_model.SetRot(m_rot);
+	m_model.SetRot(0, m_rot.y, 0);
 	m_model.SetScale(0.01f, 0.01f, 0.01f);
 	m_model.Render();
 
 	//■剣の描画
 	//右手のボーン
-	const int hand_idx = 64;
+	const int hand_idx = 66;
 	//武器のワールド行列=ボーンの行列
 	//×武器のローカル行列（平行移動×回転×スケール）
 	m_sword_matrix = m_model.GetFrameMatrix(hand_idx)
-		* CMatrix::MTranselate(-0.2, 0.5, -0.05)
+		* CMatrix::MTranselate(0.0, 0.0, -0.05)
 		* CMatrix::MRotationX(DtoR(90))
-		* CMatrix::MRotationY(DtoR(-80))
+		* CMatrix::MRotationY(DtoR(-90))
 		* CMatrix::MRotationZ(DtoR(0))
 		* CMatrix::MScale(0.005f, 0.005f, 0.005f);
 	//武器の描画
