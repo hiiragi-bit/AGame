@@ -13,11 +13,17 @@ Player::Player(const CVector3D& pos)
 	m_pos = pos;
 	//当たり判定用球の半径
 	m_rad = 0.3f;
+	//状態変数
 	m_state = eState_Idle;
+	//プレイヤーのHP
+	m_hp = 100;
+	//キャラクターの高さ
 	m_height = 2.0f;
+	//攻撃フラグ
 	m_attack_flag = false;
 	//接地フラグ
 	m_is_ground = true;
+	//各状態での工程
 	m_state_step = 0;
 
 	//腰のボーン
@@ -72,12 +78,23 @@ void Player::Move()
 		CVector3D dir = CMatrix::MRotationY(m_rot.y) * key_dir;
 		//移動
 		m_pos += dir * move_speed;
-		//ジャンプ中なら
-		/*if (!m_is_ground) {
 
-		}*/
-		//走るアニメーション
-		m_model.ChangeAnimation(0, eAnim_Run);
+		if (HOLD(CInput::eUp)) {
+			//前に走るアニメーション
+			m_model.ChangeAnimation(0, eAnim_Run);
+		}
+		if (HOLD(CInput::eDown)) {
+			//後ろに走るアニメーション
+			m_model.ChangeAnimation(0, eAnim_BackRun);
+		}
+		if (HOLD(CInput::eLeft)) {
+			//左に走るアニメーション
+			m_model.ChangeAnimation(0, eAnim_LeftRun);
+		}
+		if (HOLD(CInput::eRight)) {
+			//右に走るアニメーション
+			m_model.ChangeAnimation(0, eAnim_RightRun);
+		}
 	}
 	else {
 		//待機アニメーション
@@ -89,10 +106,18 @@ void Player::StateIdle()
 {
 	Move();
 	m_model.ChangeAnimation(1, m_model.GetAnimationJam(0));
-
-	//マウス左クリックで攻撃状態へ
-	if (PUSH(CInput::eMouseL)) {
-		m_state = eState_Attack;
+	//ジャンプ中なら
+	if (!m_is_ground) {
+		//マウス左クリックでジャンプ攻撃状態へ
+		if (PUSH(CInput::eMouseL)) {
+			m_state = eState_JumpAttack;
+		}
+	}
+	else {
+		//マウス左クリックで攻撃状態へ
+		if (PUSH(CInput::eMouseL)) {
+			m_state = eState_Attack;
+		}
 	}
 }
 
@@ -113,25 +138,43 @@ void Player::StateAttack()
 			m_state_step++;
 		}
 		break;
-	case 2:
-		if (25 < m_model.GetAnimationFrame(1) > 18) {
-			if (PUSH(CInput::eMouseL)) {
-				m_model.ChangeAnimation(1, eAnim_AttackCombo2, false);
-				m_attack_flag = true;
-				m_state_step++;
-			}
-		}
-		else if (m_model.GetAnimationFrame(1) > 26) {
-			m_state_step = 4;
+	}
+	if (m_model.isAnimationEnd(1)) {
+		m_state_step = 0;
+		m_state = eState_Idle;
+	}
+}
+
+void Player::StateJumpAttack()
+{
+	Move();
+	m_model.ChangeAnimation(1, eAnim_JumpAttack, false);
+	switch (m_state_step) {
+	case 0:
+		if (m_model.GetAnimationFrame(1) > 18) {
+			m_attack_flag = true;
+			m_state_step++;
 		}
 		break;
-	case 4:
-		if (m_model.isAnimationEnd(1)) {
-			m_state_step = 0;
-			m_state = eState_Idle;
+	case 1:
+		if (m_model.GetAnimationFrame(1) > 23) {
+			m_attack_flag = false;
+			m_state_step++;
 		}
 		break;
 	}
+	if (m_model.isAnimationEnd(1)) {
+		m_state_step = 0;
+		m_state = eState_Idle;
+	}
+}
+
+void Player::StateDamage()
+{
+}
+
+void Player::StateDeath()
+{
 }
 
 void Player::Update()
@@ -142,6 +185,15 @@ void Player::Update()
 		break;
 	case eState_Attack:
 		StateAttack();
+		break;
+	case eState_JumpAttack:
+		StateJumpAttack();
+		break;
+	case eState_Damage:
+		StateDamage();
+		break;
+	case eState_Death:
+		StateDeath();
 		break;
 	}	
 	
@@ -255,4 +307,12 @@ void Player::Collision(Base* b)
 
 void Player::TakeDamage(const CVector3D& vec)
 {
+	m_hp -= 50;
+	//プレイヤーのHPが0より大きい場合
+	if (m_hp > 0) {
+		m_state = eState_Damage;
+	}
+	else {
+		m_state = eState_Death;
+	}
 }

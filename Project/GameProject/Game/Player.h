@@ -8,8 +8,15 @@ private:
 	enum {
 		eAnim_Idle,
 		eAnim_Run,
+		eAnim_RightRun,
+		eAnim_LeftRun,
+		eAnim_BackRun,
 		eAnim_AttackCombo1,
 		eAnim_AttackCombo2,
+		eAnim_AttackCombo3,
+		eAnim_JumpAttack,
+		eAnim_Damage,
+		eAnim_Death,
 	};
 
 	//状態
@@ -17,6 +24,9 @@ private:
 		eState_Idle,
 		eState_Run,
 		eState_Attack,
+		eState_JumpAttack,
+		eState_Damage,
+		eState_Death,
 	};
 
 	//状態変数
@@ -28,6 +38,15 @@ private:
 	//攻撃状態
 	void StateAttack();
 
+	//ジャンプ攻撃状態
+	void StateJumpAttack();
+
+	//ダメージ状態
+	void StateDamage();
+
+	//死亡状態
+	void StateDeath();
+
 	//モデルオブジェクト定義
 	
 	//プレイヤーのモデル
@@ -37,6 +56,7 @@ private:
 	//剣のワールド行列
 	CMatrix m_sword_matrix;
 
+	int m_hp;				//プレイヤーのHP
 	float m_height;			//キャラクターの高さ
 	bool m_attack_flag;		//攻撃フラグ
 	CCapsule m_attack_cap;	//剣のカプセル
