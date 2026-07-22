@@ -18,7 +18,6 @@ private:
 	enum {
 		eState_Idle,
 		eState_Step,
-		eState_Stop,
 		eState_Attack,
 		eState_Damage,
 		eState_Down,
@@ -32,9 +31,6 @@ private:
 
 	//ステップ状態
 	void StateStep();
-
-	//ストップ状態
-	void StateStop();
 
 	//攻撃状態
 	void StateAttack();
@@ -55,6 +51,7 @@ private:
 	int m_attack_time;		//攻撃のクールタイム
 	int m_move_cnt;			//移動用時間計測カウンタ
 	bool m_is_ground;		//接地フラグ
+	float m_target_rot;
 
 public:
 	Enemy(const CVector3D& pos);

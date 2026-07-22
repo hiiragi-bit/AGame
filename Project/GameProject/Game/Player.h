@@ -6,17 +6,17 @@ class Player :public Base, public IDamage {
 private:
 	//アニメーション番号
 	enum {
-		eAnim_Idle,
-		eAnim_Run,
-		eAnim_RightRun,
-		eAnim_LeftRun,
-		eAnim_BackRun,
-		eAnim_AttackCombo1,
-		eAnim_AttackCombo2,
-		eAnim_AttackCombo3,
-		eAnim_JumpAttack,
-		eAnim_Damage,
-		eAnim_Death,
+		eAnim_Idle,			//待機アニメーション
+		eAnim_FrontRun,		//前に走るアニメーション
+		eAnim_RightRun,		//右に走るアニメーション
+		eAnim_LeftRun,		//左に走るアニメーション
+		eAnim_BackRun,		//後ろに走るアニメーション
+		eAnim_AttackCombo1,	//攻撃コンボ1アニメーション
+		eAnim_AttackCombo2,	//攻撃コンボ2アニメーション
+		eAnim_AttackCombo3,	//攻撃コンボ3アニメーション
+		eAnim_JumpAttack,	//ジャンプ攻撃アニメーション
+		eAnim_Damage,		//ダメージアニメーション
+		eAnim_Death,		//死亡アニメーション
 	};
 
 	//状態

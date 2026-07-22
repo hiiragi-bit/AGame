@@ -27,6 +27,7 @@ Enemy::Enemy(const CVector3D& pos)
 	m_move_cnt = 0;
 	//接地フラグ
 	m_is_ground = true;
+	m_target_rot = m_rot.y;
 }
 
 void Enemy::StateIdle()
@@ -34,7 +35,7 @@ void Enemy::StateIdle()
 	//キャラクターの移動量
 	const float move_speed = 0.05f;
 	m_attack_time++;
-	//m_move_cnt++;
+	m_move_cnt++;
 	//ターゲットへのベクトル
 	CVector3D vec;
 	if (Base* p = Base::FindObject(ePlayer)) {
@@ -68,36 +69,31 @@ void Enemy::StateIdle()
 
 void Enemy::StateStep()
 {
-	//switch (m_state_step) {
-	//case 0:
-	//{
-	//	//自身の右、後ろ、左の３方向からランダムでステップ方向を決定
-	//	int r = rand() % 3;
-	//	CVector3D dir[3] = { CVector3D(-1,0,0),CVector3D(0,0,-1),CVector3D(1,0,0) };
-	//	const float jump_pow = 0.12f;
-	//	const float step_pow = 0.08f;
-	//	m_vec = CVector3D(CMatrix::MRotationY(m_rot.y) * CVector4D(dir[r], 0)) * step_pow;
-	//	m_vec.y = jump_pow;
-	//	m_is_ground = false;
-	//}
-	//m_state_step++;
-	//m_model.ChangeAnimation(eAnim_Step, false);
-	//break;
-	//case 1:
-	//	//アニメーション終了で待機へ
-	//	if (m_model.isAnimationEnd()) {
-	//		m_move_cnt = 0;
-	//		m_state_step = 0;
-	//		m_is_ground = true;
-	//		m_state = eState_Stop;
-	//	}
-	//	break;
-	//}
-}
-
-void Enemy::StateStop()
-{
-	m_state = eState_Idle;
+	switch (m_state_step) {
+	case 0:
+	{
+		//自身の右、後ろ、左の３方向からランダムでステップ方向を決定
+		int r = rand() % 3;
+		CVector3D dir[3] = { CVector3D(-1,0,0),CVector3D(0,0,-1),CVector3D(1,0,0) };
+		const float jump_pow = 0.12f;
+		const float step_pow = 0.08f;
+		m_vec = CVector3D(CMatrix::MRotationY(m_rot.y) * CVector4D(dir[r], 0)) * step_pow;
+		m_vec.y = jump_pow;
+		m_is_ground = false;
+	}
+	m_state_step++;
+	m_model.ChangeAnimation(eAnim_Step, false);
+	break;
+	case 1:
+		//アニメーション終了で待機へ
+		if (m_model.isAnimationEnd()) {
+			m_move_cnt = rand() % 60;
+			m_state_step = 0;
+			m_is_ground = true;
+			m_state = eState_Idle;
+		}
+		break;
+	}
 }
 
 void Enemy::StateAttack()
@@ -156,9 +152,6 @@ void Enemy::Update()
 	case eState_Step:
 		StateStep();
 		break;
-	case eState_Stop:
-		StateStop();
-		break;
 	case eState_Attack:
 		StateAttack();
 		break;
@@ -168,6 +161,12 @@ void Enemy::Update()
 	case eState_Down:
 		StateDown();
 		break;
+	}
+
+	//減速
+	if (m_is_ground) {
+		m_vec.x = m_vec.x * 0.9f;
+		m_vec.z = m_vec.z * 0.9f;
 	}
 
 	//重力落下
@@ -190,11 +189,16 @@ void Enemy::Render()
 	m_model.SetRot(m_rot);
 	m_model.SetScale(m_scale);
 	m_model.Render();
+
+	if (m_attck_flag)
+		Utility::DrawCapsule(m_attack_cap, CVector4D(1, 1, 0, 0));
 }
 
 void Enemy::Collision(Base* b)
 {
 	switch (b->GetType()) {
+
+		case eEnemy:
 		//ステージとの判定
 		case eField:
 		{
