@@ -58,7 +58,7 @@ void CModel::MakePath(const char* filenPath) {
 	else strcpy_s(m_filePath,PATH_SIZE,"");
 
 }
-CModel::CModel() : m_pos(0, 0, 0), m_rot(0, 0, 0), m_scale(1, 1, 1), m_baserot(0, 0, 0), m_filePath(""), m_shadow_bias(0.0001), m_toon(false),m_time_scale(true) {
+CModel::CModel() : m_pos(0, 0, 0), m_rot(0, 0, 0), m_scale(1, 1, 1), m_baserot(0, 0, 0), m_filePath(""), m_shadow_bias(-0.0001), m_toon(false),m_time_scale(true) {
 
 }
 std::vector<CCollTriangle> CModel::CollisionCapsule(const CVector3D& top, const CVector3D& bottom, float radius) const

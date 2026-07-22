@@ -26,6 +26,12 @@ class CA3MMesh;
 	ノードクラス
 */
 class CA3MNode {
+public:
+	enum {
+		eBind_None,
+		eBind_Relative,
+		eBind_Absolute,
+	};
 #ifdef _GLLIBRARY_TOOL
 public:
 #else
@@ -43,7 +49,7 @@ protected:
 	CVector3D m_pos;
 	CQuaternion m_rot;
 	CVector3D m_scale;
-	bool m_bind;
+	int m_bind;
 	CMatrix m_bind_matrix;
 	bool m_visibility;
 	int m_animation_layer;
@@ -476,14 +482,14 @@ public:
 	@param	no			[in] ボーン番号
 	@param	mat			[in] 回転行列
 	**/
-	void BindFrameMatrix(int no, const CMatrix& mat);
+	void BindFrameMatrix(int no, const CMatrix& mat, int bind_mode = CA3MNode::eBind_Relative);
 
 	/*!
 	@brief	ボーンを指定の方向へ向ける
 	@param	no			[in] ボーン名前
 	@param	mat			[in] 回転行列
 	**/
-	void BindFrameMatrix(const char* name, const CMatrix& mat);
+	void BindFrameMatrix(const char* name, const CMatrix& mat,int bind_mode = CA3MNode::eBind_Relative);
 
 
 	/*!
