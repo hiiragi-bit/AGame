@@ -235,6 +235,7 @@ void Enemy::Collision(Base* b)
 void Enemy::TakeDamage(const CVector3D& vec)
 {
 	m_hp -= 50;
+	//“G‚ÌHP‚ª0‚æ‚è‘å‚«‚¢ê‡
 	if (m_hp > 0) {
 		m_state = eState_Damage;
 	}
