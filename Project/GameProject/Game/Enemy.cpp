@@ -197,8 +197,43 @@ void Enemy::Render()
 void Enemy::Collision(Base* b)
 {
 	switch (b->GetType()) {
-
+		//プレイヤーとの判定
+		case ePlayer:
+		{
+			CVector3D c1, d1;
+			float dist;
+			//カプセル同士の判定
+			if (CCollision::CollisionCapsule(m_capusle, b->m_capusle, &dist, &c1, &d1)) {
+				//押し戻す
+				float s = (m_capusle.GetRadius() + b->m_capusle.GetRadius()) - dist;
+				b->m_pos += d1 * s * 0.5f;
+				m_pos -= d1 * s * 0.5f;
+			}
+			//攻撃の判定
+			if (m_attck_flag &&
+				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
+				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->TakeDamage(CVector3D(0, 0, 0));
+					//多重ヒット防止
+					m_attck_flag = false;
+				}
+			}
+		}
+		break;
+		//敵との判定
 		case eEnemy:
+		{
+			CVector3D c1, d1;
+			float dist;
+			//カプセル同士の判定
+			if (CCollision::CollisionCapsule(m_capusle, b->m_capusle, &dist, &c1, &d1)) {
+				//押し戻す
+				float s = (m_capusle.GetRadius() + b->m_capusle.GetRadius()) - dist;
+				b->m_pos += d1 * s * 0.5f;
+				m_pos -= d1 * s * 0.5f;
+			}
+		}
+		break;
 		//ステージとの判定
 		case eField:
 		{

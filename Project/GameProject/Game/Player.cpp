@@ -172,10 +172,18 @@ void Player::StateJumpAttack()
 
 void Player::StateDamage()
 {
+	m_model.ChangeAnimation(0, eAnim_Damage, false);
+	if (m_model.isAnimationEnd()) {
+		m_state = eState_Idle;
+	}
 }
 
 void Player::StateDeath()
 {
+	m_model.ChangeAnimation(0, eAnim_Death, false);
+	if (m_model.isAnimationEnd()) {
+		SetKill();
+	}
 }
 
 void Player::Update()
