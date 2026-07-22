@@ -75,8 +75,11 @@ void Init(void)
 	//ƒ‰ƒCƒgÝ’è
 	CLight::SetType(0, CLight::eLight_Direction);
 	CLight::SetPos(0, CVector3D(0, 200, 200));
-	CLight::SetDir(0, CVector3D(0, -1, 0.5).GetNormalize());
-	CLight::SetColor(1, CVector3D(0.4f, 0.4f, 0.4f), CVector3D(0.6f, 0.6f, 0.6f));
+	CLight::SetDir(0, CVector3D(0, -1, -0.8).GetNormalize());
+	CVector3D ambientColor(0.7f,0.7f,0.7f);
+	CLight::SetColor(0, ambientColor, CVector3D(1, 1, 1)- ambientColor);
+
+	CShadow::SetShadowAmbient(1-ambientColor.r);	//‰e‚Ì”Z‚³
 
 
 
@@ -116,9 +119,7 @@ void Init(void)
 	ADD_RESOURCE("Sky", CModel::CreateModel("Field/Sky/Sky.obj"));
 
 	//¡‰e•`‰æ‹@”\‚ð¶¬	•`‰æ”ÍˆÍ	ŒõŒ¹‚Ì‚‚³ ‰ð‘œ“x
-	CShadow::CreateInscance(20.0f, 20.0f, 2048, 2048);
-	CShadow::SetShadowAmbient(0.8f);	//‰e‚Ì”Z‚³
-
+	CShadow::CreateInscance(20.0f, 20.0f, 2048*2, 2048*2);
 	//ƒQ[ƒ€‚ÉoŒ»‚³‚¹‚é
 
 	Base::Add(new Player(CVector3D(0, 0, 0)));
@@ -147,7 +148,7 @@ static void ResizeCallback(GLFWwindow* window, int w, int h)
 	//CCamera::GetCamera()->SetSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	CCamera::GetCamera()->Viewport(0, 0, (float)w, (float)h);
-	CCamera::GetCurrent()->Perspective(DtoR(60.0), (float)w / (float)h, 0.5, 1000.0);
+	CCamera::GetCurrent()->Perspective(DtoR(60.0), (float)w / (float)h, 0.3, 1000.0);
 
 	glfwGetWindowPos(window, &GL::window_x, &GL::window_y);
 	GL::UpdateWindowRect(GL::window_x, GL::window_y, w, h);

@@ -33,7 +33,7 @@ void CModel::UpdateMatrix() {
 	m_scaleMtx.Scale(m_scale.x,m_scale.y,m_scale.z);
 	m_matrix = m_transMtx * m_rotMtx * m_scaleMtx;
 }
-void CModel::SendShaderParam(CShader* s, const CMatrix &m, const CMatrix &mv, const CMatrix &p) {
+void CModel::SendShaderParam(CShader* s, const CMatrix &m, const CMatrix &v, const CMatrix &p) {
 
 	
 	/*
@@ -44,7 +44,8 @@ void CModel::SendShaderParam(CShader* s, const CMatrix &m, const CMatrix &mv, co
 
 	
 	glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "ProjectionMatrix"), 1, GL_FALSE, p.f);
-	glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "ModelViewMatrix"), 1, GL_FALSE, mv.f);
+	glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "ModelViewMatrix"), 1, GL_FALSE, (v*m).f);
+	glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "ViewMatrix"), 1, GL_FALSE, v.f);
 	glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "LocalMatrix"), 1, GL_FALSE, CMatrix::indentity.f);
 
 }
@@ -57,7 +58,7 @@ void CModel::MakePath(const char* filenPath) {
 	else strcpy_s(m_filePath,PATH_SIZE,"");
 
 }
-CModel::CModel() : m_pos(0, 0, 0), m_rot(0, 0, 0), m_scale(1, 1, 1), m_baserot(0, 0, 0), m_filePath(""), m_shadow_bias(-0.01), m_toon(false),m_time_scale(true) {
+CModel::CModel() : m_pos(0, 0, 0), m_rot(0, 0, 0), m_scale(1, 1, 1), m_baserot(0, 0, 0), m_filePath(""), m_shadow_bias(-0.0001), m_toon(false),m_time_scale(true) {
 
 }
 std::vector<CCollTriangle> CModel::CollisionCapsule(const CVector3D& top, const CVector3D& bottom, float radius) const

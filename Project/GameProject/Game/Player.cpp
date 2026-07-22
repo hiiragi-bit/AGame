@@ -81,16 +81,17 @@ void Player::Move()
 
 		if (HOLD(CInput::eUp)) {
 			//前に走るアニメーション
+			
 			m_model.ChangeAnimation(0, eAnim_FrontRun);
-		}
+		}else
 		if (HOLD(CInput::eDown)) {
 			//後ろに走るアニメーション
 			m_model.ChangeAnimation(0, eAnim_BackRun);
-		}
+		}else
 		if (HOLD(CInput::eLeft)) {
 			//左に走るアニメーション
 			m_model.ChangeAnimation(0, eAnim_LeftRun);
-		}
+		}else
 		if (HOLD(CInput::eRight)) {
 			//右に走るアニメーション
 			m_model.ChangeAnimation(0, eAnim_RightRun);
@@ -212,7 +213,8 @@ void Player::Update()
 
 void Player::Render()
 {
-	m_model.BindFrameMatrix(m_upper_body, CMatrix::MRotation(m_rot));
+	
+	m_model.BindFrameMatrix(m_upper_body, CMatrix::MRotation(m_rot),CA3MNode::eBind_Absolute);
 	m_model.SetPos(m_pos);
 	m_model.SetRot(0, m_rot.y, 0);
 	m_model.SetScale(0.01f, 0.01f, 0.01f);
@@ -236,6 +238,7 @@ void Player::Render()
 	float sword_rad = 0.45f;
 	sword_s = m_sword_matrix * CVector4D(0, 0, 20, 1);
 	sword_e = m_sword_matrix * CVector4D(0, 0, 150, 1);
+	
 	if (m_attack_flag) {
 		Utility::DrawCapsule(sword_s, sword_e, sword_rad, CVector4D(1, 0, 0, 0.5));
 	}
