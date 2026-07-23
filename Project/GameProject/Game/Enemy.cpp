@@ -18,7 +18,7 @@ Enemy::Enemy(const CVector3D& pos)
 	//状態変数
 	m_state = eState_Idle;
 	//攻撃フラグ
-	m_attck_flag = false;
+	m_attack_flag = false;
 	//各状態の工程
 	m_state_step = 0;
 	//攻撃のクールタイム
@@ -103,7 +103,7 @@ void Enemy::StateAttack()
 	case 0:
 		//一定フレーム以降に攻撃フラグON
 		if (m_model.GetAnimationFrame() > 7) {
-			m_attck_flag = true;
+			m_attack_flag = true;
 			m_state_step++;
 		}
 		break;
@@ -111,10 +111,10 @@ void Enemy::StateAttack()
 		//右腕の位置で攻撃用判定用カプセルを作成
 		m_attack_cap = CCapsule(m_model.GetFrameMatrix(30).GetPosition(),
 			m_model.GetFrameMatrix(31).GetPosition(),
-			0.2f);
+			0.55f);
 		//一定フレーム以降に攻撃フラグOFF
 		if (m_model.GetAnimationFrame() > 10) {
-			m_attck_flag = false;
+			m_attack_flag = false;
 			m_state_step++;
 		}
 		break;
@@ -190,7 +190,7 @@ void Enemy::Render()
 	m_model.SetScale(m_scale);
 	m_model.Render();
 
-	if (m_attck_flag)
+	if (m_attack_flag)
 		Utility::DrawCapsule(m_attack_cap, CVector4D(1, 1, 0, 0));
 }
 
@@ -210,12 +210,12 @@ void Enemy::Collision(Base* b)
 				m_pos -= d1 * s * 0.5f;
 			}
 			//攻撃の判定
-			if (m_attck_flag &&
+			if (m_attack_flag &&
 				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 					d->TakeDamage(CVector3D(0, 0, 0));
 					//多重ヒット防止
-					m_attck_flag = false;
+					m_attack_flag = false;
 				}
 			}
 		}

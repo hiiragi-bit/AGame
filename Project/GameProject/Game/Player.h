@@ -11,6 +11,10 @@ private:
 		eAnim_RightRun,		//右に走るアニメーション
 		eAnim_LeftRun,		//左に走るアニメーション
 		eAnim_BackRun,		//後ろに走るアニメーション
+		eAnim_FrontDodge,	//前に回避するアニメーション
+		eAnim_RightDodge,	//右に回避するアニメーション
+		eAnim_LeftDodge,	//左に回避するアニメーション
+		eAnim_BackDodge,	//後ろに回避するアニメーション
 		eAnim_AttackCombo1,	//攻撃コンボ1アニメーション
 		eAnim_AttackCombo2,	//攻撃コンボ2アニメーション
 		eAnim_AttackCombo3,	//攻撃コンボ3アニメーション
@@ -25,6 +29,7 @@ private:
 		eState_Run,
 		eState_Attack,
 		eState_JumpAttack,
+		eState_BackDodge,
 		eState_Damage,
 		eState_Death,
 	};
@@ -40,6 +45,9 @@ private:
 
 	//ジャンプ攻撃状態
 	void StateJumpAttack();
+
+	//後ろ回避状態
+	void StateBackDodge();
 
 	//ダメージ状態
 	void StateDamage();

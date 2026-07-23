@@ -81,12 +81,14 @@ void Player::Move()
 
 		if (HOLD(CInput::eUp)) {
 			//前に走るアニメーション
-			
 			m_model.ChangeAnimation(0, eAnim_FrontRun);
 		}else
 		if (HOLD(CInput::eDown)) {
 			//後ろに走るアニメーション
 			m_model.ChangeAnimation(0, eAnim_BackRun);
+			if (PUSH(CInput::eMouseR)) {
+				m_state = eState_BackDodge;
+			}
 		}else
 		if (HOLD(CInput::eLeft)) {
 			//左に走るアニメーション
@@ -170,10 +172,18 @@ void Player::StateJumpAttack()
 	}
 }
 
+void Player::StateBackDodge()
+{
+	m_model.ChangeAnimation(0, eAnim_BackDodge, false);
+	if (m_model.isAnimationEnd(0)) {
+		m_state = eState_Idle;
+	}
+}
+
 void Player::StateDamage()
 {
 	m_model.ChangeAnimation(0, eAnim_Damage, false);
-	if (m_model.isAnimationEnd()) {
+	if (m_model.isAnimationEnd(0)) {
 		m_state = eState_Idle;
 	}
 }
@@ -181,7 +191,7 @@ void Player::StateDamage()
 void Player::StateDeath()
 {
 	m_model.ChangeAnimation(0, eAnim_Death, false);
-	if (m_model.isAnimationEnd()) {
+	if (m_model.isAnimationEnd(0)) {
 		SetKill();
 	}
 }
@@ -197,6 +207,9 @@ void Player::Update()
 		break;
 	case eState_JumpAttack:
 		StateJumpAttack();
+		break;
+	case eState_BackDodge:
+		StateBackDodge();
 		break;
 	case eState_Damage:
 		StateDamage();
