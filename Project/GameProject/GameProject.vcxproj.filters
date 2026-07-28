@@ -20,10 +20,13 @@
     <ClInclude Include="Game\Stage.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Enemy.h">
+    <ClInclude Include="Game\Mutant.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\IDamage.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Pumpkinhulk.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -64,7 +67,10 @@
     <ClCompile Include="Game\Stage.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Enemy.cpp">
+    <ClCompile Include="Game\Mutant.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Pumpkinhulk.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
