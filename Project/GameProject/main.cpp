@@ -126,7 +126,7 @@ void Init(void)
 
 	Base::Add(new Player(CVector3D(0, 0, 0)));
 	Base::Add(new Mutant(CVector3D(0, 0, -5)));
-	Base::Add(new Pumpkinhulk(CVector3D(0, 0, -5)));
+	Base::Add(new Pumpkinhulk(CVector3D(-5, 0, 0)));
 	Base::Add(new TPSCamera);
 	Base::Add(new Stage());
 	Base::Add(new SkyBox());

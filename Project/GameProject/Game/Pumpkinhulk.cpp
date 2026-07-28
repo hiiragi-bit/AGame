@@ -10,7 +10,7 @@ Pumpkinhulk::Pumpkinhulk(const CVector3D& pos)
 	//回転値
 	m_rot = CVector3D(0, 0, 0);
 	//スケール
-	m_scale = CVector3D(0.013f, 0.013f, 0.013f);
+	m_scale = CVector3D(0.012f, 0.012f, 0.012f);
 	//当たり判定の半径
 	m_rad = 1.0f;
 	//敵のHP
@@ -33,7 +33,7 @@ Pumpkinhulk::Pumpkinhulk(const CVector3D& pos)
 void Pumpkinhulk::StateIdle()
 {
 	//キャラクターの移動量
-	const float move_speed = 0.05f;
+	const float move_speed = 0.07f;
 	m_attack_time++;
 	m_move_cnt++;
 	//ターゲットへのベクトル
@@ -102,18 +102,18 @@ void Pumpkinhulk::StateAttack()
 	switch (m_state_step) {
 	case 0:
 		//一定フレーム以降に攻撃フラグON
-		if (m_model.GetAnimationFrame() > 18) {
+		if (m_model.GetAnimationFrame() > 25) {
 			m_attack_flag = true;
 			m_state_step++;
 		}
 		break;
 	case 1:
 		//右腕の位置で攻撃用判定用カプセルを作成
-		m_attack_cap = CCapsule(m_model.GetFrameMatrix(10).GetPosition(),
-			m_model.GetFrameMatrix(12).GetPosition(),
+		m_attack_cap = CCapsule(m_model.GetFrameMatrix(11).GetPosition(),
+			m_model.GetFrameMatrix(13).GetPosition(),
 			0.5f);
 		//一定フレーム以降に攻撃フラグOFF
-		if (m_model.GetAnimationFrame() > 20) {
+		if (m_model.GetAnimationFrame() > 28) {
 			m_attack_flag = false;
 			m_state_step++;
 		}

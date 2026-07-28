@@ -1,6 +1,6 @@
 #include "Mutant.h"
 
-Pumpkinhulk::Pumpkinhulk(const CVector3D& pos)
+Mutant::Mutant(const CVector3D& pos)
 	:Base(eEnemy)
 {
 	//モデルの複製
@@ -30,7 +30,7 @@ Pumpkinhulk::Pumpkinhulk(const CVector3D& pos)
 	m_target_rot = m_rot.y;
 }
 
-void Pumpkinhulk::StateIdle()
+void Mutant::StateIdle()
 {
 	//キャラクターの移動量
 	const float move_speed = 0.05f;
@@ -67,7 +67,7 @@ void Pumpkinhulk::StateIdle()
 	}
 }
 
-void Pumpkinhulk::StateStep()
+void Mutant::StateStep()
 {
 	switch (m_state_step) {
 	case 0:
@@ -96,7 +96,7 @@ void Pumpkinhulk::StateStep()
 	}
 }
 
-void Pumpkinhulk::StateAttack()
+void Mutant::StateAttack()
 {
 	m_model.ChangeAnimation(eAnim_Attack, false);
 	switch (m_state_step) {
@@ -127,7 +127,7 @@ void Pumpkinhulk::StateAttack()
 	}
 }
 
-void Pumpkinhulk::StateDamage()
+void Mutant::StateDamage()
 {
 	m_model.ChangeAnimation(eAnim_Damage, false);
 	if (m_model.isAnimationEnd()) {
@@ -135,7 +135,7 @@ void Pumpkinhulk::StateDamage()
 	}
 }
 
-void Pumpkinhulk::StateDeath()
+void Mutant::StateDeath()
 {
 	m_model.ChangeAnimation(eAnim_Death, false);
 	if (m_model.isAnimationEnd()) {
@@ -143,7 +143,7 @@ void Pumpkinhulk::StateDeath()
 	}
 }
 
-void Pumpkinhulk::Update()
+void Mutant::Update()
 {
 	switch (m_state) {
 	case eState_Idle:
@@ -183,7 +183,7 @@ void Pumpkinhulk::Update()
 	m_model.UpdateAnimation();
 }
 
-void Pumpkinhulk::Render()
+void Mutant::Render()
 {
 	m_model.SetPos(m_pos);
 	m_model.SetRot(m_rot);
@@ -194,7 +194,7 @@ void Pumpkinhulk::Render()
 		Utility::DrawCapsule(m_attack_cap, CVector4D(1, 1, 0, 0));
 }
 
-void Pumpkinhulk::Collision(Base* b)
+void Mutant::Collision(Base* b)
 {
 	switch (b->GetType()) {
 		//プレイヤーとの判定
@@ -271,7 +271,7 @@ void Pumpkinhulk::Collision(Base* b)
 	}
 }
 
-void Pumpkinhulk::TakeDamage(const CVector3D& vec)
+void Mutant::TakeDamage(const CVector3D& vec)
 {
 	m_hp -= 50;
 	//敵のHPが0より大きい場合

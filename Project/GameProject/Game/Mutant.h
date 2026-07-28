@@ -2,7 +2,7 @@
 #include "../Base/Base.h"
 #include "IDamage.h"
 
-class Pumpkinhulk :public Base, public IDamage {
+class Mutant :public Base, public IDamage {
 private:
 	//アニメーション番号
 	enum {
@@ -54,7 +54,7 @@ private:
 	float m_target_rot;
 
 public:
-	Pumpkinhulk(const CVector3D& pos);
+	Mutant(const CVector3D& pos);
 	void Update()override;
 	void Render()override;
 	void Collision(Base* b)override;
