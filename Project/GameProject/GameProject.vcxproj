@@ -28,6 +28,7 @@
     <ClInclude Include="Game\Pumpkinhulk.h" />
     <ClInclude Include="Game\Stage.h" />
     <ClInclude Include="Game\TPSCamera.h" />
+    <ClInclude Include="Game\Warrok.h" />
     <ClInclude Include="Global.h" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +40,7 @@
     <ClCompile Include="Game\Pumpkinhulk.cpp" />
     <ClCompile Include="Game\Stage.cpp" />
     <ClCompile Include="Game\TPSCamera.cpp" />
+    <ClCompile Include="Game\Warrok.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
