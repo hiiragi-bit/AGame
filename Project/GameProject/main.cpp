@@ -2,6 +2,7 @@
 #include "Game/Player.h"
 #include "Game/Mutant.h"
 #include "Game/Pumpkinhulk.h"
+#include "Game/Warrok.h"
 #include "Game/TPSCamera.h"
 #include "Game/Stage.h"
 //--------------------------------------------
@@ -67,8 +68,8 @@ void Init(void)
 	CInput::SetButton(0, CInput::eMouseC, VK_MBUTTON);
 
 	//★マウス非表示
-//	CInput::ShowCursor(false);
-//	CInput::SetMouseInside(true);
+	CInput::ShowCursor(false);
+	CInput::SetMouseInside(true);
 	CInput::Update();
 	CInput::Update();
 
@@ -117,16 +118,18 @@ void Init(void)
 	ADD_RESOURCE("Sword", CModel::CreateModel("Wepon/Sword/Sword.obj"));
 	ADD_RESOURCE("Mutant", CModel::CreateModel("Charactor/Mutant/Mutant.a3m"));
 	ADD_RESOURCE("Pumpkinhulk", CModel::CreateModel("Charactor/Pumpkinhulk/Pumpkinhulk.a3m"));
-	ADD_RESOURCE("Stage", CModel::CreateModel("Field/Cube/Cube.obj", 2, 1, 2));
+	ADD_RESOURCE("Warrok", CModel::CreateModel("Charactor/Warrok/Warrok.a3m"));
+	ADD_RESOURCE("DStage", CModel::CreateModel("Field/DungeonStage/DStage.obj", 2, 1, 2));
 	ADD_RESOURCE("Sky", CModel::CreateModel("Field/Sky/Sky.obj"));
 
 	//■影描画機能を生成	描画範囲	光源の高さ 解像度
 	CShadow::CreateInscance(20.0f, 20.0f, 2048*2, 2048*2);
 	//ゲームに出現させる
 
-	Base::Add(new Player(CVector3D(0, 0, 0)));
-	Base::Add(new Mutant(CVector3D(0, 0, -5)));
-	Base::Add(new Pumpkinhulk(CVector3D(-5, 0, 0)));
+	Base::Add(new Player(CVector3D(0, 5, 0)));
+	//Base::Add(new Mutant(CVector3D(0, 0, -5)));
+	//Base::Add(new Pumpkinhulk(CVector3D(-5, 0, 0)));
+	Base::Add(new Warrok(CVector3D(5, 0, 0)));
 	Base::Add(new TPSCamera);
 	Base::Add(new Stage());
 	Base::Add(new SkyBox());

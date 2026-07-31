@@ -62,7 +62,7 @@ void Mutant::StateIdle()
 		}
 	}
 	//ŽžŠÔŒo‰ß‚ÅƒXƒeƒbƒv
-	if (m_move_cnt >= 180) {
+	if (m_move_cnt >= 300) {
 		m_state = eState_Step;
 	}
 }
@@ -213,6 +213,7 @@ void Mutant::Collision(Base* b)
 			if (m_attack_flag &&
 				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->m_hp -= 50;
 					d->TakeDamage(CVector3D(0, 0, 0));
 					//‘½dƒqƒbƒg–hŽ~
 					m_attack_flag = false;
@@ -273,7 +274,6 @@ void Mutant::Collision(Base* b)
 
 void Mutant::TakeDamage(const CVector3D& vec)
 {
-	m_hp -= 50;
 	//“G‚ÌHP‚ª0‚æ‚è‘å‚«‚¢ê‡
 	if (m_hp > 0) {
 		m_state = eState_Damage;

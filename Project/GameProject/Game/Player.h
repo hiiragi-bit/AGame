@@ -64,9 +64,9 @@ private:
 	//剣のワールド行列
 	CMatrix m_sword_matrix;
 
-	int m_hp;				//プレイヤーのHP
 	float m_height;			//キャラクターの高さ
 	bool m_attack_flag;		//攻撃フラグ
+	bool m_attackJ_flag;	//ジャンプ攻撃フラグ
 	CCapsule m_attack_cap;	//剣のカプセル
 	bool m_is_ground;		//接地フラグ
 	int m_state_step;		//各状態での工程

@@ -44,7 +44,6 @@ private:
 	//敵のモデル
 	CModelA3M m_model;
 
-	int m_hp;				//敵のHP
 	bool m_attack_flag;		//攻撃フラグ
 	CCapsule m_attack_cap;	//攻撃のカプセル
 	int m_state_step;		//各状態の工程

@@ -21,6 +21,8 @@ Player::Player(const CVector3D& pos)
 	m_height = 2.0f;
 	//UŒ‚ƒtƒ‰ƒO
 	m_attack_flag = false;
+	//ƒWƒƒƒ“ƒvUŒ‚ƒtƒ‰ƒO
+	m_attackJ_flag = false;
 	//Ú’nƒtƒ‰ƒO
 	m_is_ground = true;
 	//Šeó‘Ô‚Å‚ÌH’ö
@@ -155,13 +157,13 @@ void Player::StateJumpAttack()
 	switch (m_state_step) {
 	case 0:
 		if (m_model.GetAnimationFrame(1) > 18) {
-			m_attack_flag = true;
+			m_attackJ_flag = true;
 			m_state_step++;
 		}
 		break;
 	case 1:
 		if (m_model.GetAnimationFrame(1) > 23) {
-			m_attack_flag = false;
+			m_attackJ_flag = false;
 			m_state_step++;
 		}
 		break;
@@ -183,6 +185,7 @@ void Player::StateBackDodge()
 void Player::StateDamage()
 {
 	m_model.ChangeAnimation(0, eAnim_Damage, false);
+	m_model.ChangeAnimation(1, eAnim_Damage, false);
 	if (m_model.isAnimationEnd(0)) {
 		m_state = eState_Idle;
 	}
@@ -191,6 +194,7 @@ void Player::StateDamage()
 void Player::StateDeath()
 {
 	m_model.ChangeAnimation(0, eAnim_Death, false);
+	m_model.ChangeAnimation(1, eAnim_Death, false);
 	if (m_model.isAnimationEnd(0)) {
 		SetKill();
 	}
@@ -285,9 +289,20 @@ void Player::Collision(Base* b)
 			if (m_attack_flag &&
 				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->m_hp -= 50;
 					d->TakeDamage(CVector3D(0, 0, 0));
 					//‘½dƒqƒbƒg–hŽ~
 					m_attack_flag = false;
+				}
+			}
+			//ƒWƒƒƒ“ƒvUŒ‚‚Æ‚Ì”»’è
+			if (m_attackJ_flag &&
+				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
+				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->m_hp -= 100;
+					d->TakeDamage(CVector3D(0, 0, 0));
+					//‘½dƒqƒbƒg–hŽ~
+					m_attackJ_flag = false;
 				}
 			}
 		}
@@ -333,7 +348,6 @@ void Player::Collision(Base* b)
 
 void Player::TakeDamage(const CVector3D& vec)
 {
-	m_hp -= 50;
 	//ƒvƒŒƒCƒ„[‚ÌHP‚ª0‚æ‚è‘å‚«‚¢ê‡
 	if (m_hp > 0) {
 		m_state = eState_Damage;
