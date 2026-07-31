@@ -14,7 +14,7 @@ Mutant::Mutant(const CVector3D& pos)
 	//“–‚½‚è”»’è‚Ì”¼Œa
 	m_rad = 1.0f;
 	//“G‚ÌHP
-	m_hp = 100;
+	m_hp = 2;
 	//ó‘Ô•Ï”
 	m_state = eState_Idle;
 	//UŒ‚ƒtƒ‰ƒO
@@ -213,7 +213,7 @@ void Mutant::Collision(Base* b)
 			if (m_attack_flag &&
 				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
-					d->m_hp -= 50;
+					d->m_hp -= 1;
 					d->TakeDamage(CVector3D(0, 0, 0));
 					//‘½dƒqƒbƒg–h~
 					m_attack_flag = false;

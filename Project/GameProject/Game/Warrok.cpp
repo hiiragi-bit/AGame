@@ -1,4 +1,5 @@
 #include "Warrok.h"
+#include "Gamedata.h"
 
 Warrok::Warrok(const CVector3D& pos)
 	:Base(eEnemy)
@@ -14,7 +15,7 @@ Warrok::Warrok(const CVector3D& pos)
 	//“–‚½‚è”»’è‚Ì”¼Œa
 	m_rad = 1.0f;
 	//“G‚ÌHP
-	m_hp = 100;
+	m_hp = 4;
 	//ó‘Ô•Ï”
 	m_state = eState_Idle;
 	//‰EUŒ‚ƒtƒ‰ƒO
@@ -322,7 +323,8 @@ void Warrok::Collision(Base* b)
 		if (m_attackR_flag &&
 			CCollision::CollisionCapsule(m_attackR_cap, b->m_capusle, &dist, &c1, &d1)) {
 			if (IDamage* d = dynamic_cast<IDamage*>(b)) {
-				d->m_hp -= 50;
+				d->m_hp -= 1;
+				Gamedata::h_hp += 1;
 				d->TakeDamage(CVector3D(0, 0, 0));
 				//‘½dƒqƒbƒg–h~
 				m_attackR_flag = false;
@@ -332,7 +334,8 @@ void Warrok::Collision(Base* b)
 		if (m_attackL_flag &&
 			CCollision::CollisionCapsule(m_attackL_cap, b->m_capusle, &dist, &c1, &d1)) {
 			if (IDamage* d = dynamic_cast<IDamage*>(b)) {
-				d->m_hp -= 50;
+				d->m_hp -= 1;
+				Gamedata::h_hp += 1;
 				d->TakeDamage(CVector3D(0, 0, 0));
 				//‘½dƒqƒbƒg–h~
 				m_attackL_flag = false;

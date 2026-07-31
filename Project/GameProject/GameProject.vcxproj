@@ -20,28 +20,38 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Base.h" />
+    <ClInclude Include="Clear\Clear.h" />
     <ClInclude Include="Effekseer\EffekseerEffect.h" />
     <ClInclude Include="Effekseer\EffekseerManager.h" />
+    <ClInclude Include="Game\Gamedata.h" />
     <ClInclude Include="Game\Mutant.h" />
     <ClInclude Include="Game\IDamage.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\Pumpkinhulk.h" />
     <ClInclude Include="Game\Stage.h" />
     <ClInclude Include="Game\TPSCamera.h" />
+    <ClInclude Include="Game\UI.h" />
     <ClInclude Include="Game\Warrok.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Title\Gameover.h" />
+    <ClInclude Include="Title\Title.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Base.cpp" />
+    <ClCompile Include="Clear\Clear.cpp" />
     <ClCompile Include="Effekseer\EffekseerEffect.cpp" />
     <ClCompile Include="Effekseer\EffekseerManager.cpp" />
+    <ClCompile Include="Game\Gamedata.cpp" />
     <ClCompile Include="Game\Mutant.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\Pumpkinhulk.cpp" />
     <ClCompile Include="Game\Stage.cpp" />
     <ClCompile Include="Game\TPSCamera.cpp" />
+    <ClCompile Include="Game\UI.cpp" />
     <ClCompile Include="Game\Warrok.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Title\Gameover.cpp" />
+    <ClCompile Include="Title\Title.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FE2CE3B1-49BF-46A5-9DB1-9BD5B52FE1A0}</ProjectGuid>

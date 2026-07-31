@@ -32,6 +32,21 @@
     <ClInclude Include="Game\Warrok.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\UI.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Gamedata.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Title\Title.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Clear\Clear.h">
+      <Filter>Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="Title\Gameover.h">
+      <Filter>Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -78,6 +93,21 @@
     </ClCompile>
     <ClCompile Include="Game\Warrok.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\UI.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Gamedata.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Title\Title.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Clear\Clear.cpp">
+      <Filter>Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="Title\Gameover.cpp">
+      <Filter>Title</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Gamedata.h"
 
 Player::Player(const CVector3D& pos)
 	:Base(ePlayer)
@@ -16,7 +17,7 @@ Player::Player(const CVector3D& pos)
 	//状態変数
 	m_state = eState_Idle;
 	//プレイヤーのHP
-	m_hp = 100;
+	m_hp = 15;
 	//キャラクターの高さ
 	m_height = 2.0f;
 	//攻撃フラグ
@@ -124,6 +125,19 @@ void Player::StateIdle()
 			m_state = eState_Attack;
 		}
 	}
+	if (Gamedata::n_num > 0) {
+		if (PUSH(CInput::eButton6)) {
+			Gamedata::n_num -= 1;
+			Gamedata::h_hp -= 10;
+			m_hp += 10;
+			if (Gamedata::h_hp < 0) {
+				Gamedata::h_hp = 0;
+			}
+			if (m_hp > 15) {
+				m_hp = 15;
+			}
+		}
+	}
 }
 
 void Player::StateAttack()
@@ -184,6 +198,7 @@ void Player::StateBackDodge()
 
 void Player::StateDamage()
 {
+	//Gamedata::h_hp += 1;
 	m_model.ChangeAnimation(0, eAnim_Damage, false);
 	m_model.ChangeAnimation(1, eAnim_Damage, false);
 	if (m_model.isAnimationEnd(0)) {
@@ -193,6 +208,7 @@ void Player::StateDamage()
 
 void Player::StateDeath()
 {
+	Gamedata::h_hp = 15;
 	m_model.ChangeAnimation(0, eAnim_Death, false);
 	m_model.ChangeAnimation(1, eAnim_Death, false);
 	if (m_model.isAnimationEnd(0)) {
@@ -289,7 +305,7 @@ void Player::Collision(Base* b)
 			if (m_attack_flag &&
 				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
-					d->m_hp -= 50;
+					d->m_hp -= 1;
 					d->TakeDamage(CVector3D(0, 0, 0));
 					//多重ヒット防止
 					m_attack_flag = false;
@@ -299,7 +315,7 @@ void Player::Collision(Base* b)
 			if (m_attackJ_flag &&
 				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
-					d->m_hp -= 100;
+					d->m_hp -= 2;
 					d->TakeDamage(CVector3D(0, 0, 0));
 					//多重ヒット防止
 					m_attackJ_flag = false;
