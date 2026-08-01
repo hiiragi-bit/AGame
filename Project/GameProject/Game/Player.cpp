@@ -323,6 +323,40 @@ void Player::Collision(Base* b)
 			}
 		}
 		break;
+		//ボスとの判定
+		case eEnemyBoss:
+		{
+			CVector3D c1, d1;
+			float dist;
+			//カプセル同士の判定
+			if (CCollision::CollisionCapsule(m_capusle, b->m_capusle, &dist, &c1, &d1)) {
+				//押し戻す
+				float s = (m_capusle.GetRadius() + b->m_capusle.GetRadius()) - dist;
+				b->m_pos += d1 * s * 0.5f;
+				m_pos -= d1 * s * 0.5f;
+			}
+			//攻撃との判定
+			if (m_attack_flag &&
+				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
+				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->m_hp -= 1;
+					d->TakeDamage(CVector3D(0, 0, 0));
+					//多重ヒット防止
+					m_attack_flag = false;
+				}
+			}
+			//ジャンプ攻撃との判定
+			if (m_attackJ_flag &&
+				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
+				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->m_hp -= 2;
+					d->TakeDamage(CVector3D(0, 0, 0));
+					//多重ヒット防止
+					m_attackJ_flag = false;
+				}
+			}
+		}
+		break;
 		//ステージとの判定
 		case eField:
 		//モデルとの判定(球)(カプセル)

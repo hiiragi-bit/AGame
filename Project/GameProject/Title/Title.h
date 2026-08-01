@@ -3,7 +3,7 @@
 
 class Title :public Base {
 private:
-	CImage m_img;
+	//CImage m_img;
 	//文字表示オブジェクト
 	CFont m_title_text;
 	//待ち時間

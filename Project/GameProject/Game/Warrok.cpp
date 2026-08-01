@@ -2,7 +2,7 @@
 #include "Gamedata.h"
 
 Warrok::Warrok(const CVector3D& pos)
-	:Base(eEnemy)
+	:Base(eEnemyBoss)
 {
 	//モデルの複製
 	m_model = COPY_RESOURCE("Warrok", CModelA3M);
@@ -11,7 +11,7 @@ Warrok::Warrok(const CVector3D& pos)
 	//回転値
 	m_rot = CVector3D(0, 0, 0);
 	//スケール
-	m_scale = CVector3D(0.012f, 0.012f, 0.012f);
+	m_scale = CVector3D(0.015f, 0.015f, 0.015f);
 	//当たり判定の半径
 	m_rad = 1.0f;
 	//敵のHP

@@ -2,11 +2,17 @@
 #define GRAVITY (9.8f*0.001)
 //Ží—Þ‚Ì—ñ‹“
 enum {
+	eTitle,
+	eGameover,
+	eClear,
+	eText,
+	eGame,
 	eCamera,
 	eSkyBox,
 	eField,
 	ePlayer,
 	eEnemy,
+	eEnemyBoss,
 	ePlayer_Attack,
 	eEnemy_Attack,
 	eBullet,
