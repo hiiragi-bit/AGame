@@ -35,6 +35,8 @@ void Game::Update()
 		//ゲームシーンへ
 		Base::Add(new Gameover);
 		Base::Add(new GameoverText);
+		Base::Add(new GameoverText2);
+		Base::Add(new GameoverText3);
 	}
 
 	//ゲームクリアー
@@ -45,5 +47,6 @@ void Game::Update()
 		//ゲームシーンへ
 		Base::Add(new Clear);
 		Base::Add(new ClearText);
+		Base::Add(new ClearText2);
 	}
 }

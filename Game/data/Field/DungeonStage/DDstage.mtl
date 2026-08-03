@@ -9,17 +9,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 3
-map_Kd C:/Users/shuto/Downloads/AGame/AGame/Game/data/Field/DungeonStage/textures/Stone_A.png
-
-newmtl Material.006
-Ns 250.000000
-Ka 0.528701 0.528701 0.528701
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 3
-map_Kd C:/Users/shuto/Downloads/AGame/AGame/Game/data/Field/Dungeon/Bricks.png
+map_Kd textures/Stone_A.png
+map_Bump -bm 1.000000 textures/Stone_A_normal.png
 
 newmtl Material.007
 Ns 250.000000
@@ -29,24 +20,5 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 3
-map_Kd C:/Users/shuto/Downloads/AGame/AGame/Game/data/Field/Dungeon/Bricks.png
-
-newmtl Material.008
-Ns 250.000000
-Ka 0.528701 0.528701 0.528701
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 3
-map_Kd C:/Users/shuto/Downloads/AGame/AGame/Game/data/Field/Dungeon/Bricks.png
-
-newmtl Material.009
-Ns 250.000000
-Ka 0.528701 0.528701 0.528701
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 3
-map_Kd C:/Users/shuto/Downloads/AGame/AGame/Game/data/Field/Dungeon/Bricks.png
+map_Kd textures/Bricks.png
+map_Bump -bm 1.000000 textures/Bricks_normal.png

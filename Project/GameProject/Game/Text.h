@@ -10,18 +10,37 @@ public:
 };
 
 class GameoverText :public Base {
-	//文字表示オブジェクト
-	CFont m_Gameover_text;
+	CImage m_img;
 public:
 	GameoverText();
 	void Draw();
 };
 
+class GameoverText2 :public Base {
+	CImage m_img;
+public:
+	GameoverText2();
+	void Draw();
+};
+
+class GameoverText3 :public Base {
+	CImage m_img;
+public:
+	GameoverText3();
+	void Draw();
+};
+
 class ClearText :public Base {
-	//文字表示オブジェクト
-	CFont m_Clear_text;
+	CImage m_img;
 public:
 	ClearText();
+	void Draw();
+};
+
+class ClearText2 :public Base {
+	CImage m_img;
+public:
+	ClearText2();
 	void Draw();
 };
 

@@ -15,25 +15,62 @@ void TitleText::Draw()
 
 GameoverText::GameoverText() :Base(eText)
 {
+	m_img = COPY_RESOURCE("Gameover", CImage);
 }
 
 void GameoverText::Draw()
 {
-	//文字表示
-	m_Gameover_text.Draw(800, 904, 255, 255, 255, "Rキーでリトライ");
-	m_Gameover_text.Draw(800, 982, 255, 255, 255, "Zキーでタイトルへ");
-	m_Gameover_text.SetFontSize(46);
+	m_img.SetPos(500, 250);
+	m_img.SetSize(920, 220);
+	m_img.Draw();
+}
+
+GameoverText2::GameoverText2() :Base(eText)
+{
+	m_img = COPY_RESOURCE("Gameover2", CImage);
+}
+
+void GameoverText2::Draw()
+{
+	m_img.SetPos(590, 600);
+	m_img.SetSize(720, 170);
+	m_img.Draw();
+}
+
+GameoverText3::GameoverText3() :Base(eText)
+{
+	m_img = COPY_RESOURCE("Gameover3", CImage);
+}
+
+void GameoverText3::Draw()
+{
+	m_img.SetPos(590, 700);
+	m_img.SetSize(720, 170);
+	m_img.Draw();
 }
 
 ClearText::ClearText() :Base(eText)
 {
+	m_img = COPY_RESOURCE("ClearText", CImage);
 }
 
 void ClearText::Draw()
 {
-	//文字表示
-	m_Clear_text.Draw(800, 982, 255, 255, 255, "Zキーでタイトルへ");
-	m_Clear_text.SetFontSize(46);
+	m_img.SetPos(500, 250);
+	m_img.SetSize(920, 220);
+	m_img.Draw();
+}
+
+ClearText2::ClearText2() :Base(eText)
+{
+	m_img = COPY_RESOURCE("ClearText2", CImage);
+}
+
+void ClearText2::Draw()
+{
+	m_img.SetPos(590, 700);
+	m_img.SetSize(720, 170);
+	m_img.Draw();
 }
 
 GuideText::GuideText() :Base(eText)
