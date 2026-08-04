@@ -323,6 +323,40 @@ void Player::Collision(Base* b)
 			}
 		}
 		break;
+		//“GP‚Æ‚Ì”»’è
+		case eEnemyP:
+		{
+			CVector3D c1, d1;
+			float dist;
+			//ƒJƒvƒZƒ‹“¯m‚Ì”»’è
+			if (CCollision::CollisionCapsule(m_capusle, b->m_capusle, &dist, &c1, &d1)) {
+				//‰Ÿ‚µ–ß‚·
+				float s = (m_capusle.GetRadius() + b->m_capusle.GetRadius()) - dist;
+				b->m_pos += d1 * s * 0.5f;
+				m_pos -= d1 * s * 0.5f;
+			}
+			//UŒ‚‚Æ‚Ì”»’è
+			if (m_attack_flag &&
+				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
+				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->m_hp -= 1;
+					d->TakeDamage(CVector3D(0, 0, 0));
+					//‘½dƒqƒbƒg–h~
+					m_attack_flag = false;
+				}
+			}
+			//ƒWƒƒƒ“ƒvUŒ‚‚Æ‚Ì”»’è
+			if (m_attackJ_flag &&
+				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
+				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
+					d->m_hp -= 2;
+					d->TakeDamage(CVector3D(0, 0, 0));
+					//‘½dƒqƒbƒg–h~
+					m_attackJ_flag = false;
+				}
+			}
+		}
+		break;
 		//ƒ{ƒX‚Æ‚Ì”»’è
 		case eEnemyBoss:
 		{

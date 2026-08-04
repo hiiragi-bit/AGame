@@ -1,21 +1,34 @@
 #include "Text.h"
 
+Titlelogo::Titlelogo() :Base(eText)
+{
+	m_img = COPY_RESOURCE("Titlelogo", CImage);
+}
+
+void Titlelogo::Draw()
+{
+	m_img.SetPos(500, 250);
+	m_img.SetSize(920, 220);
+	m_img.Draw();
+}
+
 TitleText::TitleText() :Base(eText)
 {
+	m_img = COPY_RESOURCE("TitleText", CImage);
 }
 
 void TitleText::Draw()
 {
-	//文字表示
-	m_Title_text.Draw(800, 812, 255, 255, 255, "Zキーでスタート");
-	m_Title_text.SetFontSize(46);
+	m_img.SetPos(590, 700);
+	m_img.SetSize(720, 200);
+	m_img.Draw();
 }
 
 
 
 GameoverText::GameoverText() :Base(eText)
 {
-	m_img = COPY_RESOURCE("Gameover", CImage);
+	m_img = COPY_RESOURCE("GameoverText", CImage);
 }
 
 void GameoverText::Draw()
@@ -27,7 +40,7 @@ void GameoverText::Draw()
 
 GameoverText2::GameoverText2() :Base(eText)
 {
-	m_img = COPY_RESOURCE("Gameover2", CImage);
+	m_img = COPY_RESOURCE("GameoverText2", CImage);
 }
 
 void GameoverText2::Draw()
@@ -39,13 +52,13 @@ void GameoverText2::Draw()
 
 GameoverText3::GameoverText3() :Base(eText)
 {
-	m_img = COPY_RESOURCE("Gameover3", CImage);
+	m_img = COPY_RESOURCE("GameoverText3", CImage);
 }
 
 void GameoverText3::Draw()
 {
 	m_img.SetPos(590, 700);
-	m_img.SetSize(720, 170);
+	m_img.SetSize(720, 200);
 	m_img.Draw();
 }
 

@@ -12,6 +12,7 @@ enum {
 	eField,
 	ePlayer,
 	eEnemy,
+	eEnemyP,
 	eEnemyBoss,
 	ePlayer_Attack,
 	eEnemy_Attack,

@@ -247,6 +247,7 @@ void Warrok::StateDeath()
 {
 	m_model.ChangeAnimation(eAnim_Death, false);
 	if (m_model.isAnimationEnd()) {
+		Gamedata::c_clear = 1;
 		SetKill();
 	}
 }

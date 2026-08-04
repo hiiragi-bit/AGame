@@ -22,6 +22,8 @@ void Clear::Update()
 		Base::Add(new TitleText);
 		Gamedata::h_hp = 0;
 		Gamedata::n_num = 5;
+		Gamedata::b_boss = 0;
+		Gamedata::c_clear = 0;
 	}
 }
 

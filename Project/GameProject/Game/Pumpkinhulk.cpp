@@ -1,7 +1,8 @@
 #include "Pumpkinhulk.h"
+#include "Gamedata.h"
 
 Pumpkinhulk::Pumpkinhulk(const CVector3D& pos)
-	:Base(eEnemy)
+	:Base(eEnemyP)
 {
 	//ƒ‚ƒfƒ‹‚Ì•¡»
 	m_model = COPY_RESOURCE("Pumpkinhulk", CModelA3M);
@@ -139,6 +140,7 @@ void Pumpkinhulk::StateDeath()
 {
 	m_model.ChangeAnimation(eAnim_Death, false);
 	if (m_model.isAnimationEnd()) {
+		Gamedata::b_boss = 1;
 		SetKill();
 	}
 }
@@ -214,6 +216,7 @@ void Pumpkinhulk::Collision(Base* b)
 			CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
 			if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 				d->m_hp -= 1;
+				Gamedata::h_hp += 1;
 				d->TakeDamage(CVector3D(0, 0, 0));
 				//‘½dƒqƒbƒg–h~
 				m_attack_flag = false;

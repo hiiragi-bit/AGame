@@ -22,10 +22,6 @@ private:
 		eState_Idle,
 		eState_Step,
 		eState_Attack,
-		/*eState_SlamAttack,
-		eState_ComboAttack1,
-		eState_ComboAttack2,
-		eState_JumpAttack,*/
 		eState_Damage,
 		eState_Death,
 	};

@@ -1,5 +1,6 @@
 #include "Base/Base.h"
 #include "Title/Title.h"
+#include "Game/Text.h"
 
 //--------------------------------------------
 //グローバル変数領域
@@ -66,8 +67,8 @@ void Init(void)
 	CInput::SetButton(0, CInput::eMouseC, VK_MBUTTON);
 
 	//★マウス非表示
-	//CInput::ShowCursor(false);
-	//CInput::SetMouseInside(true);
+	CInput::ShowCursor(false);
+	CInput::SetMouseInside(true);
 	CInput::Update();
 	CInput::Update();
 
@@ -122,18 +123,24 @@ void Init(void)
 	ADD_RESOURCE("HPbar", CImage::CreateImage("UI/HPbar/HPbar.png"));
 	ADD_RESOURCE("PotionRed", CImage::CreateImage("UI/Potion/PotionRed.png"));
 	ADD_RESOURCE("Number", CImage::CreateImage("UI/Number/Number.png"));
+	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title/Title.png"));
+	ADD_RESOURCE("Titlelogo", CImage::CreateImage("Title/Title/Titlelogo.png"));
+	ADD_RESOURCE("TitleText", CImage::CreateImage("Title/Title/TitleText.png"));
 	ADD_RESOURCE("Clear", CImage::CreateImage("Title/Clear/Clear.png"));
 	ADD_RESOURCE("ClearText", CImage::CreateImage("Title/Clear/ClearText.png"));
 	ADD_RESOURCE("ClearText2", CImage::CreateImage("Title/Clear/ClearText2.png"));
-	ADD_RESOURCE("Gameover", CImage::CreateImage("Title/Gameover/GAMEOVER.png"));
-	ADD_RESOURCE("Gameover2", CImage::CreateImage("Title/Gameover/GameoverRkey.png"));
-	ADD_RESOURCE("Gameover3", CImage::CreateImage("Title/Gameover/GameoverZkey.png"));
+	ADD_RESOURCE("Gameover", CImage::CreateImage("Title/Gameover/Gameover.png"));
+	ADD_RESOURCE("GameoverText", CImage::CreateImage("Title/Gameover/GAMEOVERText.png"));
+	ADD_RESOURCE("GameoverText2", CImage::CreateImage("Title/Gameover/GameoverRkey.png"));
+	ADD_RESOURCE("GameoverText3", CImage::CreateImage("Title/Gameover/GameoverZkey.png"));
 
 	//■影描画機能を生成	描画範囲	光源の高さ 解像度
 	CShadow::CreateInscance(20.0f, 20.0f, 2048*2, 2048*2);
 
 	//タイトルシーン
 	Base::Add(new Title);
+	Base::Add(new Titlelogo);
+	Base::Add(new TitleText);
 }
 
 

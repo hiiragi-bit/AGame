@@ -1,9 +1,15 @@
 #pragma once
 #include "Base/Base.h"
 
+class Titlelogo :public Base {
+	CImage m_img;
+public:
+	Titlelogo();
+	void Draw();
+};
+
 class TitleText :public Base {
-	//文字表示オブジェクト
-	CFont m_Title_text;
+	CImage m_img;
 public:
 	TitleText();
 	void Draw();

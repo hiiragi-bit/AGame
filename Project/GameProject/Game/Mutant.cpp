@@ -1,4 +1,5 @@
 #include "Mutant.h"
+#include "Gamedata.h"
 
 Mutant::Mutant(const CVector3D& pos)
 	:Base(eEnemy)
@@ -214,6 +215,7 @@ void Mutant::Collision(Base* b)
 				CCollision::CollisionCapsule(m_attack_cap, b->m_capusle, &dist, &c1, &d1)) {
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 					d->m_hp -= 1;
+					Gamedata::h_hp += 1;
 					d->TakeDamage(CVector3D(0, 0, 0));
 					//‘½dƒqƒbƒg–h~
 					m_attack_flag = false;

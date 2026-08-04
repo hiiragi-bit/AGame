@@ -4,7 +4,7 @@
 Title::Title()
 	:Base(eTitle)
 {
-	//m_img = COPY_RESOURCE("Title", CImage);
+	m_img = COPY_RESOURCE("Title", CImage);
 	m_cnt = 0;
 }
 
@@ -21,6 +21,6 @@ void Title::Update()
 
 void Title::Draw()
 {
-	//m_img.SetSize(1920, 1080);
-	//m_img.Draw();
+	m_img.SetSize(1920, 1080);
+	m_img.Draw();
 }

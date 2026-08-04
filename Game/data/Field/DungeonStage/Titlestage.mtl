@@ -1,0 +1,13 @@
+# Blender 5.1.1 MTL File: 'Titlestage.blend'
+# www.blender.org
+
+newmtl Material.002
+Ns 250.000000
+Ka 0.528701 0.528701 0.528701
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+map_Kd textures/Stone_A.png
+map_Bump -bm 1.000000 textures/Stone_A_normal.png

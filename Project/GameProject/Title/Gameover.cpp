@@ -21,6 +21,8 @@ void Gameover::Update()
 		Base::Add(new Game());
 		Gamedata::h_hp = 0;
 		Gamedata::n_num = 5;
+		Gamedata::b_boss = 0;
+		Gamedata::c_clear = 0;
 	}
 	//Zキーでクリア画面破棄
 	if (m_cnt++ > 2 && PUSH(CInput::eButton1)) {
@@ -31,6 +33,8 @@ void Gameover::Update()
 		Base::Add(new TitleText);
 		Gamedata::h_hp = 0;
 		Gamedata::n_num = 5;
+		Gamedata::b_boss = 0;
+		Gamedata::c_clear = 0;
 	}
 }
 

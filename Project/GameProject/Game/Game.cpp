@@ -9,14 +9,14 @@
 #include "Title/Gameover.h"
 #include "Clear/Clear.h"
 #include "Text.h"
+#include "Gamedata.h"
 
 Game::Game()
 	:Base(eGame)
 {
 	Base::Add(new Player(CVector3D(0, 0, 0)));
-	//Base::Add(new Mutant(CVector3D(0, 0, -5)));
-	//Base::Add(new Pumpkinhulk(CVector3D(-5, 0, 0)));
-	Base::Add(new Warrok(CVector3D(5, 0, 0)));
+	Base::Add(new Mutant(CVector3D(0, 0, -5)));
+	Base::Add(new Pumpkinhulk(CVector3D(-5, 0, 0)));
 	Base::Add(new TPSCamera);
 	Base::Add(new Stage());
 	Base::Add(new SkyBox());
@@ -27,7 +27,13 @@ Game::Game()
 
 void Game::Update()
 {
-	//ゲームオーバー
+	//Pumpkinhulkを倒すとボス出現
+	if (Gamedata::b_boss == 1) {
+		Gamedata::b_boss = 2;
+		Base::Add(new Warrok(CVector3D(5, 0, 0)));
+	}
+
+	//プレイヤーが倒されるとゲームオーバー
 	Base* b = Base::FindObject(ePlayer);
 	if (!b) {
 		//全てのオブジェクトを破壊
@@ -39,9 +45,8 @@ void Game::Update()
 		Base::Add(new GameoverText3);
 	}
 
-	//ゲームクリアー
-	Base* c = Base::FindObject(eEnemyBoss);
-	if (!c) {
+	//ボスを倒すとゲームクリアー
+	if (Gamedata::c_clear == 1) {
 		//全てのオブジェクトを破壊
 		Base::KillALL();
 		//ゲームシーンへ

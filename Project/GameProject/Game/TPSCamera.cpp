@@ -37,6 +37,7 @@ void TPSCamera::Render()
 		CMatrix cam_matrix = CMatrix::MTranselate(b->m_pos)
 			* CMatrix::MTranselate(CVector3D(0, 1.1, 0))
 			* CMatrix::MRotation(m_rot)
+			//* CMatrix::MTranselate(CVector3D(-20, 10, -30));
 			* CMatrix::MTranselate(CVector3D(-0.5, 0.4, -2));
 		//カメラのワールド行列でカメラを設定
 		CCamera::GetCurrent()->SetTranseRot(cam_matrix);
