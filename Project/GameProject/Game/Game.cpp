@@ -10,19 +10,22 @@
 #include "Clear/Clear.h"
 #include "Text.h"
 #include "Gamedata.h"
+#include "Effekseer/EffekseerManager.h"
 
 Game::Game()
 	:Base(eGame)
 {
 	Base::Add(new Player(CVector3D(0, 0, 0)));
-	Base::Add(new Mutant(CVector3D(0, 0, -5)));
-	Base::Add(new Pumpkinhulk(CVector3D(-5, 0, 0)));
-	Base::Add(new TPSCamera);
+	Base::Add(new Mutant(CVector3D(-5, 0, -20)));
+	Base::Add(new Mutant(CVector3D(5, 0, -20)));
+	Base::Add(new Pumpkinhulk(CVector3D(0, 0, -20)));
+	Base::Add(new TPSCamera());
 	Base::Add(new Stage());
 	Base::Add(new SkyBox());
 	Base::Add(new HPbar());
 	Base::Add(new PotionRed());
 	Base::Add(new Number());
+	Base::Add(new EffekseerManager());
 }
 
 void Game::Update()
@@ -30,7 +33,7 @@ void Game::Update()
 	//Pumpkinhulkを倒すとボス出現
 	if (Gamedata::b_boss == 1) {
 		Gamedata::b_boss = 2;
-		Base::Add(new Warrok(CVector3D(5, 0, 0)));
+		Base::Add(new Warrok(CVector3D(0, 0, -20)));
 	}
 
 	//プレイヤーが倒されるとゲームオーバー

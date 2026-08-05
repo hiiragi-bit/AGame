@@ -15,7 +15,7 @@ Pumpkinhulk::Pumpkinhulk(const CVector3D& pos)
 	//当たり判定の半径
 	m_rad = 1.0f;
 	//敵のHP
-	m_hp = 3;
+	m_hp = 6;
 	//状態変数
 	m_state = eState_Idle;
 	//攻撃フラグ
@@ -81,9 +81,14 @@ void Pumpkinhulk::StateStep()
 		m_vec = CVector3D(CMatrix::MRotationY(m_rot.y) * CVector4D(dir[r], 0)) * step_pow;
 		m_vec.y = jump_pow;
 		m_is_ground = false;
+		m_model.ChangeAnimation(eAnim_Step, false);
+		if (m_state == eState_Step) {
+			m_state_step++;
+		}
+		else {
+			m_state = eState_Step;
+		}
 	}
-	m_state_step++;
-	m_model.ChangeAnimation(eAnim_Step, false);
 	break;
 	case 1:
 		//アニメーション終了で待機へ

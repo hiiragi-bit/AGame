@@ -15,7 +15,7 @@ Warrok::Warrok(const CVector3D& pos)
 	//“–‚½‚è”»’è‚Ì”¼Œa
 	m_rad = 1.0f;
 	//“G‚ÌHP
-	m_hp = 4;
+	m_hp = 10;
 	//ó‘Ô•Ï”
 	m_state = eState_Idle;
 	//‰EUŒ‚ƒtƒ‰ƒO

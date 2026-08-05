@@ -126,13 +126,17 @@ void Init(void)
 	ADD_RESOURCE("Title", CImage::CreateImage("Title/Title/Title.png"));
 	ADD_RESOURCE("Titlelogo", CImage::CreateImage("Title/Title/Titlelogo.png"));
 	ADD_RESOURCE("TitleText", CImage::CreateImage("Title/Title/TitleText.png"));
+	ADD_RESOURCE("TitleTextnum", CImage::CreateImage("Title/Title/TitleTextnum.png"));
 	ADD_RESOURCE("Clear", CImage::CreateImage("Title/Clear/Clear.png"));
 	ADD_RESOURCE("ClearText", CImage::CreateImage("Title/Clear/ClearText.png"));
 	ADD_RESOURCE("ClearText2", CImage::CreateImage("Title/Clear/ClearText2.png"));
+	ADD_RESOURCE("ClearTextnum", CImage::CreateImage("Title/Clear/ClearTextnum.png"));
 	ADD_RESOURCE("Gameover", CImage::CreateImage("Title/Gameover/Gameover.png"));
 	ADD_RESOURCE("GameoverText", CImage::CreateImage("Title/Gameover/GAMEOVERText.png"));
-	ADD_RESOURCE("GameoverText2", CImage::CreateImage("Title/Gameover/GameoverRkey.png"));
-	ADD_RESOURCE("GameoverText3", CImage::CreateImage("Title/Gameover/GameoverZkey.png"));
+	ADD_RESOURCE("GameoverTextR", CImage::CreateImage("Title/Gameover/GameoverRkey.png"));
+	ADD_RESOURCE("GameoverText3", CImage::CreateImage("Title/Gameover/Gameover3.png"));
+	ADD_RESOURCE("GameoverTextZ", CImage::CreateImage("Title/Gameover/GameoverZkey.png"));
+	ADD_RESOURCE("GameoverText1", CImage::CreateImage("Title/Gameover/Gameover1.png"));
 
 	//■影描画機能を生成	描画範囲	光源の高さ 解像度
 	CShadow::CreateInscance(20.0f, 20.0f, 2048*2, 2048*2);
@@ -250,8 +254,8 @@ int __main(int* argcp, char** argv) {
 	GL::hWnd = WindowFromDC(glDc);
 	
 	//★前面ボーダー無し
-	//SetWindowLong(GL::hWnd, GWL_STYLE, WS_MAXIMIZE);
-	//SetWindowPos(GL::hWnd, HWND_TOP, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SWP_SHOWWINDOW);
+	SetWindowLong(GL::hWnd, GWL_STYLE, WS_MAXIMIZE);
+	SetWindowPos(GL::hWnd, HWND_TOP, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SWP_SHOWWINDOW);
 	Init();
 
 

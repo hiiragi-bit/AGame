@@ -18,6 +18,8 @@ EffekseerManager::EffekseerManager() :
 		{ "Blow2",u"Effect/tktk01/Blow2.efk" },
 		{ "Cure7",u"Effect/tktk01/Cure7.efk" },
 		{ "Hanmado",u"Effect/Sample/03_Hanmado01/Effect/hit_hanmado_0409.efkefc" },
+		{ "Heal",u"Effect/Sample/00_Basic/Laser03.efkefc" },
+		{ "Attack",u"Effect/Sample/00_Basic/Simple_SpawnMethod1.efkefc" },
 	};
 
 

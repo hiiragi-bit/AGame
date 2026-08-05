@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Gamedata.h"
+#include "Effekseer/EffekseerEffect.h"
 
 Player::Player(const CVector3D& pos)
 	:Base(ePlayer)
@@ -52,8 +53,8 @@ void Player::Move()
 	//キャラクターの移動量
 	const float move_speed = 0.1f;
 
-	if (m_is_ground && PUSH(CInput::eButton5)) {
-		m_vec.y = 0.2;
+	if (m_is_ground && PUSH(CInput::eButton5) || PUSH(CInput::E_BUTTON::eButton3)) {
+		m_vec.y = 0.15;
 		m_is_ground = false;
 	}
 
@@ -73,31 +74,44 @@ void Player::Move()
 	if (HOLD(CInput::eRight))
 		key_dir.x = -1;
 
+	//スティックの倒し具合
+	float key_force = 0;
+	//0番のコントローラーがあれば
+	if (CInput::GetPadData(0)) {
+		//0番のコントローラーの左スティックの状態を得る
+		CVector2D axis = CInput::GetLStick(0);
+		//キャラクター移動用キーに調整
+		key_dir = CVector3D(-axis.x, 0, axis.y);
+	}
+
 	//移動処理
 	//入力があれば
 	if (key_dir.LengthSq() > 0) {
 		//■移動処理 回転行列×キー方向
+		//倒し具合を求める
+		key_force = min(1.0, key_dir.Length());
 		//方向ベクトル
 		CVector3D dir = CMatrix::MRotationY(m_rot.y) * key_dir;
 		//移動
-		m_pos += dir * move_speed;
-
-		if (HOLD(CInput::eUp)) {
+		m_pos += dir * move_speed * key_force;
+		//m_model.SetAnimationSpeed(key_force);
+		float a = atan2(key_dir.x, key_dir.z);
+		if (abs(a)<DtoR(45)) {
 			//前に走るアニメーション
 			m_model.ChangeAnimation(0, eAnim_FrontRun);
 		}else
-		if (HOLD(CInput::eDown)) {
+		if (abs(a)>DtoR(125)) {
 			//後ろに走るアニメーション
 			m_model.ChangeAnimation(0, eAnim_BackRun);
-			if (PUSH(CInput::eMouseR)) {
+			/*if (PUSH(CInput::eMouseR)) {
 				m_state = eState_BackDodge;
-			}
+			}*/
 		}else
-		if (HOLD(CInput::eLeft)) {
+		if (a>DtoR(0)) {
 			//左に走るアニメーション
 			m_model.ChangeAnimation(0, eAnim_LeftRun);
 		}else
-		if (HOLD(CInput::eRight)) {
+		if (a<DtoR(0)) {
 			//右に走るアニメーション
 			m_model.ChangeAnimation(0, eAnim_RightRun);
 		}
@@ -115,21 +129,25 @@ void Player::StateIdle()
 	//ジャンプ中なら
 	if (!m_is_ground) {
 		//マウス左クリックでジャンプ攻撃状態へ
-		if (PUSH(CInput::eMouseL)) {
+		if (PUSH(CInput::eMouseL) || PUSH(CInput::E_BUTTON::eButton4)) {
 			m_state = eState_JumpAttack;
 		}
 	}
 	else {
 		//マウス左クリックで攻撃状態へ
-		if (PUSH(CInput::eMouseL)) {
+		if (PUSH(CInput::eMouseL) || PUSH(CInput::E_BUTTON::eButton4)) {
 			m_state = eState_Attack;
 		}
 	}
+	//回復アイテムの個数が0より上なら
 	if (Gamedata::n_num > 0) {
-		if (PUSH(CInput::eButton6)) {
+		//Eキーで回復アイテム使用
+		if (PUSH(CInput::eButton6) || PUSH(CInput::E_BUTTON::eButton2)) {
 			Gamedata::n_num -= 1;
 			Gamedata::h_hp -= 10;
 			m_hp += 10;
+			Base::Add(new EffekseerEffect("Heal", CVector3D(m_pos), CVector3D(m_rot),
+				CVector3D(1, 1, 1)));
 			if (Gamedata::h_hp < 0) {
 				Gamedata::h_hp = 0;
 			}
@@ -307,6 +325,8 @@ void Player::Collision(Base* b)
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 					d->m_hp -= 1;
 					d->TakeDamage(CVector3D(0, 0, 0));
+					Base::Add(new EffekseerEffect("Arrow1", CVector3D(m_pos), CVector3D(m_rot),
+						CVector3D(1, 1, 1)));
 					//多重ヒット防止
 					m_attack_flag = false;
 				}
@@ -317,6 +337,8 @@ void Player::Collision(Base* b)
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 					d->m_hp -= 2;
 					d->TakeDamage(CVector3D(0, 0, 0));
+					Base::Add(new EffekseerEffect("Arrow1", CVector3D(m_pos), CVector3D(m_rot), 
+						CVector3D(1, 1, 1)));
 					//多重ヒット防止
 					m_attackJ_flag = false;
 				}
@@ -341,6 +363,8 @@ void Player::Collision(Base* b)
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 					d->m_hp -= 1;
 					d->TakeDamage(CVector3D(0, 0, 0));
+					Base::Add(new EffekseerEffect("Arrow1", CVector3D(m_pos), CVector3D(m_rot),
+						CVector3D(1, 1, 1)));
 					//多重ヒット防止
 					m_attack_flag = false;
 				}
@@ -351,6 +375,8 @@ void Player::Collision(Base* b)
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 					d->m_hp -= 2;
 					d->TakeDamage(CVector3D(0, 0, 0));
+					Base::Add(new EffekseerEffect("Arrow1", CVector3D(m_pos), CVector3D(m_rot),
+						CVector3D(1, 1, 1)));
 					//多重ヒット防止
 					m_attackJ_flag = false;
 				}
@@ -375,6 +401,8 @@ void Player::Collision(Base* b)
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 					d->m_hp -= 1;
 					d->TakeDamage(CVector3D(0, 0, 0));
+					Base::Add(new EffekseerEffect("Arrow1", CVector3D(m_pos), CVector3D(m_rot),
+						CVector3D(1, 1, 1)));
 					//多重ヒット防止
 					m_attack_flag = false;
 				}
@@ -385,6 +413,8 @@ void Player::Collision(Base* b)
 				if (IDamage* d = dynamic_cast<IDamage*>(b)) {
 					d->m_hp -= 2;
 					d->TakeDamage(CVector3D(0, 0, 0));
+					Base::Add(new EffekseerEffect("Arrow1", CVector3D(m_pos), CVector3D(m_rot),
+						CVector3D(1, 1, 1)));
 					//多重ヒット防止
 					m_attackJ_flag = false;
 				}
@@ -432,6 +462,8 @@ void Player::Collision(Base* b)
 
 void Player::TakeDamage(const CVector3D& vec)
 {
+	Base::Add(new EffekseerEffect("Attack", CVector3D(m_pos), CVector3D(m_rot),
+		CVector3D(0.2, 0.2, 0.2)));
 	//プレイヤーのHPが0より大きい場合
 	if (m_hp > 0) {
 		m_state = eState_Damage;

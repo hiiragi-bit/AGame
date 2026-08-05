@@ -12,6 +12,15 @@ void TPSCamera::Update()
 {
 	//回転速度係数
 	float cam_speed = 0.002f;
+	//右スティックでカメラ操作
+	if (CInput::GetPadData(0)) {
+		//回転速度係数
+		float cam_speed_stick = 0.05f;
+		//右スティックのベクトル取得
+		CVector2D axis = CInput::GetRStick(0);
+		//カメラ回転
+		m_rot += CVector3D(-axis.y, -axis.x, 0) * cam_speed_stick;
+	}
 	//マウスの移動量
 	CVector2D mouse_vec = CInput::GetMouseVec();
 	//マウス移動からカメラを回転

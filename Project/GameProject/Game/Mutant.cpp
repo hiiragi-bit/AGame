@@ -1,5 +1,6 @@
 #include "Mutant.h"
 #include "Gamedata.h"
+#include "Effekseer/EffekseerEffect.h"
 
 Mutant::Mutant(const CVector3D& pos)
 	:Base(eEnemy)
@@ -15,7 +16,7 @@ Mutant::Mutant(const CVector3D& pos)
 	//“–‚½‚è”»’è‚Ì”¼Œa
 	m_rad = 1.0f;
 	//“G‚ÌHP
-	m_hp = 2;
+	m_hp = 4;
 	//ó‘Ô•Ï”
 	m_state = eState_Idle;
 	//UŒ‚ƒtƒ‰ƒO

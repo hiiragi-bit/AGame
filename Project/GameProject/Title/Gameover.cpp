@@ -14,7 +14,7 @@ Gameover::Gameover()
 void Gameover::Update()
 {
 	//Rキーでゲームオーバー画面破棄
-	if (m_cnt++ > 2 && PUSH(CInput::eButton7)) {
+	if (m_cnt++ > 2 && PUSH(CInput::eButton7) || PUSH(CInput::E_BUTTON::eButton3)) {
 		//全てのオブジェクトを破壊
 		Base::KillALL();
 		//ゲームシーンへ
@@ -25,11 +25,12 @@ void Gameover::Update()
 		Gamedata::c_clear = 0;
 	}
 	//Zキーでクリア画面破棄
-	if (m_cnt++ > 2 && PUSH(CInput::eButton1)) {
+	if (m_cnt++ > 2 && PUSH(CInput::eButton1) || PUSH(CInput::E_BUTTON::eButton1)) {
 		//全てのオブジェクトを破壊
 		Base::KillALL();
 		//タイトルシーンへ
 		Base::Add(new Title);
+		Base::Add(new Titlelogo);
 		Base::Add(new TitleText);
 		Gamedata::h_hp = 0;
 		Gamedata::n_num = 5;

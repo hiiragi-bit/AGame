@@ -14,7 +14,8 @@ void Titlelogo::Draw()
 
 TitleText::TitleText() :Base(eText)
 {
-	m_img = COPY_RESOURCE("TitleText", CImage);
+	//m_img = COPY_RESOURCE("TitleText", CImage);
+	m_img = COPY_RESOURCE("TitleTextnum", CImage);
 }
 
 void TitleText::Draw()
@@ -40,7 +41,8 @@ void GameoverText::Draw()
 
 GameoverText2::GameoverText2() :Base(eText)
 {
-	m_img = COPY_RESOURCE("GameoverText2", CImage);
+	//m_img = COPY_RESOURCE("GameoverTextR", CImage);
+	m_img = COPY_RESOURCE("GameoverText3", CImage);
 }
 
 void GameoverText2::Draw()
@@ -52,7 +54,8 @@ void GameoverText2::Draw()
 
 GameoverText3::GameoverText3() :Base(eText)
 {
-	m_img = COPY_RESOURCE("GameoverText3", CImage);
+	//m_img = COPY_RESOURCE("GameoverTextZ", CImage);
+	m_img = COPY_RESOURCE("GameoverText1", CImage);
 }
 
 void GameoverText3::Draw()
@@ -76,7 +79,8 @@ void ClearText::Draw()
 
 ClearText2::ClearText2() :Base(eText)
 {
-	m_img = COPY_RESOURCE("ClearText2", CImage);
+	//m_img = COPY_RESOURCE("ClearText2", CImage);
+	m_img = COPY_RESOURCE("ClearTextnum", CImage);
 }
 
 void ClearText2::Draw()

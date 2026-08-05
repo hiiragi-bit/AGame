@@ -11,7 +11,7 @@ Title::Title()
 void Title::Update()
 {
 	//Zキーでタイトル破棄
-	if (m_cnt++ > 2 && PUSH(CInput::eButton1)) {
+	if (m_cnt++ > 2 && PUSH(CInput::eButton1) || PUSH(CInput::E_BUTTON::eButton1)) {
 		//全てのオブジェクトを破壊
 		Base::KillALL();
 		//ゲームシーンへ
