@@ -97,13 +97,13 @@ GuideText::GuideText() :Base(eText)
 void GuideText::Draw()
 {
 	//文字表示
-	/*m_Guide_text.Draw(84, 1044, 255, 255, 255, ":移動");
-	m_Guide_text.Draw(84, 1008, 255, 255, 255, ":　　がジャンプ");
-	m_Guide_text.Draw(84, 972, 255, 255, 255, ":　がジャンプ");
-	m_Guide_text.Draw(84, 936, 255, 255, 255, ":　がジャンプ");
-	m_Guide_text.Draw(84, 900, 255, 255, 255, ":　が赤魔法");
+	m_Guide_text.Draw(1550, 1044, 255, 255, 255, ":ジャンプ攻撃");
+	m_Guide_text.Draw(1550, 994, 255, 255, 255, ":攻撃");
+	m_Guide_text.Draw(1550, 944, 255, 255, 255, ":ジャンプ");
+	m_Guide_text.Draw(1550, 894, 255, 255, 255, ":移動");
+	/*m_Guide_text.Draw(84, 900, 255, 255, 255, ":　が赤魔法");
 	m_Guide_text.Draw(84, 864, 255, 255, 255, ":　が青魔法");
 	m_Guide_text.Draw(84, 828, 255, 255, 255, ":　を操作する");
-	m_Guide_text.Draw(84, 792, 255, 255, 255, ":　を操作する");
-	m_Guide_text.SetFontSize(36);*/
+	m_Guide_text.Draw(84, 792, 255, 255, 255, ":　を操作する");*/
+	m_Guide_text.SetFontSize(50);
 }

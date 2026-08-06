@@ -26,6 +26,7 @@ Game::Game()
 	Base::Add(new PotionRed());
 	Base::Add(new Number());
 	Base::Add(new EffekseerManager());
+	Base::Add(new GuideText());
 }
 
 void Game::Update()
