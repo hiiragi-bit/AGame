@@ -53,6 +53,7 @@ void Player::Move()
 	//キャラクターの移動量
 	const float move_speed = 0.1f;
 
+	//地上にいる状態でSPACEまたは3ボタン
 	if (m_is_ground && PUSH(CInput::eButton5) || PUSH(CInput::E_BUTTON::eButton3)) {
 		m_vec.y = 0.15;
 		m_is_ground = false;

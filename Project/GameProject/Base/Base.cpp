@@ -37,18 +37,20 @@ void Base::Kill(unsigned int mask)
 }
 void Base::ClearInstance()
 {
-
 	auto itr = m_list.begin();
 	//末尾まで繰り返す
 	while (itr != m_list.end()) {
 		//削除
-		delete* itr;
+		//delete* itr;
 		//リストから除外する
 		//次のオブジェクトを受け取る
 		itr = m_list.erase(itr);
 	}
 }
 void Base::CheckKillALL() {
+	//Killフラグがtrueのオブジェクトをリストから除外する
+	/*auto KillCheck = [](const std::shared_ptr<Base>& b) { return b->m_kill; };
+	m_list.remove_if(KillCheck);*/
 	auto itr = m_list.begin();
 	//末尾まで繰り返す
 	while (itr != m_list.end()) {

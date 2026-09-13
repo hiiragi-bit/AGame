@@ -137,6 +137,16 @@ void Init(void)
 	ADD_RESOURCE("GameoverText3", CImage::CreateImage("Title/Gameover/Gameover3.png"));
 	ADD_RESOURCE("GameoverTextZ", CImage::CreateImage("Title/Gameover/GameoverZkey.png"));
 	ADD_RESOURCE("GameoverText1", CImage::CreateImage("Title/Gameover/Gameover1.png"));
+	ADD_RESOURCE("Leftstick", CImage::CreateImage("UI/Leftstick.png"));
+	ADD_RESOURCE("Button2", CImage::CreateImage("UI/2.png"));
+	ADD_RESOURCE("Button3", CImage::CreateImage("UI/3.png"));
+	ADD_RESOURCE("Button4", CImage::CreateImage("UI/4.png"));
+	ADD_RESOURCE("W", CImage::CreateImage("UI/W.png"));
+	ADD_RESOURCE("A", CImage::CreateImage("UI/A.png"));
+	ADD_RESOURCE("S", CImage::CreateImage("UI/S.png"));
+	ADD_RESOURCE("D", CImage::CreateImage("UI/D.png"));
+	ADD_RESOURCE("SPACE", CImage::CreateImage("UI/SPACE.png"));
+	ADD_RESOURCE("Leftmouse", CImage::CreateImage("UI/Leftmouse.png"));
 
 	//Å°âeï`âÊã@î\Çê∂ê¨	ï`âÊîÕàÕ	åıåπÇÃçÇÇ≥ âëúìx
 	CShadow::CreateInscance(20.0f, 20.0f, 2048*2, 2048*2);

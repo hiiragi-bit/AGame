@@ -26,6 +26,18 @@ Game::Game()
 	Base::Add(new PotionRed());
 	Base::Add(new Number());
 	Base::Add(new EffekseerManager());
+	Base::Add(new Leftstick());
+	//Base::Add(new W());
+	//Base::Add(new A());
+	//Base::Add(new S());
+	//Base::Add(new D());
+	//Base::Add(new Button2());
+	Base::Add(new Button3());
+	Base::Add(new Button4Attack());
+	Base::Add(new Button4Jumpattack());
+	//Base::Add(new SPACE());
+	//Base::Add(new LeftmouseAttack());
+	//Base::Add(new LeftmouseJumpattack());
 	Base::Add(new GuideText());
 }
 
@@ -49,7 +61,7 @@ void Game::Update()
 		Base::Add(new GameoverText3);
 	}
 
-	//ボスを倒すとゲームクリアー
+	//ボスを倒すとゲームクリア
 	if (Gamedata::c_clear == 1) {
 		//全てのオブジェクトを破壊
 		Base::KillALL();
