@@ -97,7 +97,7 @@ Leftstick::Leftstick() :Base(eText)
 
 void Leftstick::Draw()
 {
-	m_img.SetPos(1500, 850);
+	m_img.SetPos(1500, 800);
 	m_img.SetSize(50, 50);
 	m_img.Draw();
 }
@@ -109,7 +109,7 @@ Button2::Button2() :Base(eText)
 
 void Button2::Draw()
 {
-	m_img.SetPos(1500, 850);
+	m_img.SetPos(1500, 950);
 	m_img.SetSize(50, 50);
 	m_img.Draw();
 }
@@ -121,7 +121,7 @@ Button3::Button3() :Base(eText)
 
 void Button3::Draw()
 {
-	m_img.SetPos(1500, 900);
+	m_img.SetPos(1500, 850);
 	m_img.SetSize(50, 50);
 	m_img.Draw();
 }
@@ -133,7 +133,7 @@ Button4Attack::Button4Attack() :Base(eText)
 
 void Button4Attack::Draw()
 {
-	m_img.SetPos(1500, 950);
+	m_img.SetPos(1500, 900);
 	m_img.SetSize(50, 50);
 	m_img.Draw();
 }
@@ -157,7 +157,7 @@ W::W() :Base(eText)
 
 void W::Draw()
 {
-	m_img.SetPos(1350, 850);
+	m_img.SetPos(1350, 800);
 	m_img.SetSize(50, 50);
 	m_img.Draw();
 }
@@ -169,7 +169,7 @@ A::A() :Base(eText)
 
 void A::Draw()
 {
-	m_img.SetPos(1400, 850);
+	m_img.SetPos(1400, 800);
 	m_img.SetSize(50, 50);
 	m_img.Draw();
 }
@@ -181,7 +181,7 @@ S::S() :Base(eText)
 
 void S::Draw()
 {
-	m_img.SetPos(1450, 850);
+	m_img.SetPos(1450, 800);
 	m_img.SetSize(50, 50);
 	m_img.Draw();
 }
@@ -193,7 +193,7 @@ D::D() :Base(eText)
 
 void D::Draw()
 {
-	m_img.SetPos(1500, 850);
+	m_img.SetPos(1500, 800);
 	m_img.SetSize(50, 50);
 	m_img.Draw();
 }
@@ -205,7 +205,7 @@ SPACE::SPACE() :Base(eText)
 
 void SPACE::Draw()
 {
-	m_img.SetPos(1393, 900);
+	m_img.SetPos(1393, 850);
 	m_img.SetSize(160, 50);
 	m_img.Draw();
 }
@@ -217,7 +217,7 @@ LeftmouseAttack::LeftmouseAttack():Base(eText)
 
 void LeftmouseAttack::Draw()
 {
-	m_img.SetPos(1470, 920);
+	m_img.SetPos(1470, 870);
 	m_img.SetSize(100, 100);
 	m_img.Draw();
 }
@@ -243,8 +243,9 @@ void GuideText::Draw()
 	//文字表示
 	m_Guide_text.Draw(1550, 1044, 255, 255, 255, ":ジャンプ攻撃");
 	m_Guide_text.Draw(1200, 1044, 255, 255, 255, "ジャンプ中に");
-	m_Guide_text.Draw(1550, 994, 255, 255, 255, ":攻撃");
-	m_Guide_text.Draw(1550, 944, 255, 255, 255, ":ジャンプ");
-	m_Guide_text.Draw(1550, 894, 255, 255, 255, ":移動");
+	m_Guide_text.Draw(1550, 994, 255, 255, 255, ":回復");
+	m_Guide_text.Draw(1550, 944, 255, 255, 255, ":攻撃");
+	m_Guide_text.Draw(1550, 894, 255, 255, 255, ":ジャンプ");
+	m_Guide_text.Draw(1550, 844, 255, 255, 255, ":移動");
 	m_Guide_text.SetFontSize(50);
 }

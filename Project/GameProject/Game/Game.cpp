@@ -31,7 +31,7 @@ Game::Game()
 	//Base::Add(new A());
 	//Base::Add(new S());
 	//Base::Add(new D());
-	//Base::Add(new Button2());
+	Base::Add(new Button2());
 	Base::Add(new Button3());
 	Base::Add(new Button4Attack());
 	Base::Add(new Button4Jumpattack());
